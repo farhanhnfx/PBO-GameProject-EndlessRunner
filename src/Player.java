@@ -6,11 +6,11 @@ public class Player extends JPanel implements KeyListener, ActionListener {
     public static final int width = 128;
     public static final int height = 240;
     private ImageIcon carImg;
-    public static JLabel carLabel;
+    private JLabel carLabel;
     public static int posX = 272;
     public static int posY = 320;
     private final Timer timer = new Timer(1000, this);
-    private static int newXLoc;
+    // private static int newXLoc;
 
     public Player() {
         carImg = new ImageIcon("src/assets/Car.png");
@@ -71,11 +71,21 @@ public class Player extends JPanel implements KeyListener, ActionListener {
     public JLabel getCarLabel() {
         return this.carLabel;
     }
-    // public static void moveRight() {
-    //     newXLoc = posX + width + 40;
-    // }
-    // public static void moveLeft() {
-    //     newXLoc = posX - width - 40;
+    public void moveRight() {
+        // newXLoc = posX + width + 40;
+        // toNewLoc();
+        // System.out.println(posX + ", " + newXLoc);
+        carLabel.setLocation(posX, posY);
+        // posX = newXLoc;
+    }
+    public void moveLeft() {
+        // newXLoc = posX - width - 40;
+        // toNewLoc();
+        carLabel.setLocation(posX - width - 40, posY);
+        // posX = newXLoc;
+    }
+    // private void toNewLoc() {
+    //     timer.start();
     // }
 
     @Override
@@ -100,7 +110,20 @@ public class Player extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        System.out.println("xxxx");
+        // System.out.println(posX + ", " + newXLoc);
+        // if (posX < newXLoc) {
+        //     for (int i = posX; i <= newXLoc; i++) {
+        //         carLabel.setLocation(i, posY);
+        //     }
+        // }
+        // else if (posX > newXLoc) {
+        //     for (int i = newXLoc; i >= posX; i--) {
+        //         carLabel.setLocation(i, posY);
+        //     }
+        // }
+        // else {
+        //     timer.stop();
+        // }
     }
     
 }

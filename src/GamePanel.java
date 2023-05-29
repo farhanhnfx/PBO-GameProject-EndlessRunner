@@ -19,8 +19,8 @@ public class GamePanel extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         bg = new Background();
-        // player = new Player();
-        // add(Player.carLabel);
+        player = new Player();
+        add(player.getCarLabel());
 
         roadMarks = bg.getRoadMarks();
         add(bg);
@@ -39,15 +39,15 @@ public class GamePanel extends JFrame implements Runnable {
                 int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_LEFT:
-                        Player.posX -= Player.width + 40;
-                        // Player.moveLeft();
+                        // Player.posX -= Player.width + 40;
+                        player.moveLeft();
                         break;
                     case KeyEvent.VK_RIGHT:
-                        Player.posX += Player.width + 40;
-                        // Player.moveRight();
+                        // Player.posX += Player.width + 40;
+                        player.moveRight();
                         break;
                 }
-                Player.carLabel.setLocation(Player.posX, Player.posY);
+                // player.getCarLabel().setLocation(Player.posX, Player.posY);
             }
 
             @Override

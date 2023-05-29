@@ -20,7 +20,7 @@ public class Background extends JPanel {
         // add(roadLabel);
         setLayout(null);
 
-        Player player = new Player();
+        // Player player = new Player();
 
         roadMarks = new ArrayList<>();
         roadMarks.add(new RoadMark(0));
@@ -29,7 +29,7 @@ public class Background extends JPanel {
         roadMarks.add(new RoadMark(roadMarks.get(2).getPosY() + markGap));
         // player.addKeyListener(player);
         // player.setFocusable(true);
-        add(player.getCarLabel());
+        // add(player.getCarLabel());
         // add(player);
         for (RoadMark rm : roadMarks) {
             // rm.setBounds(RoadMark.posX, rm.getPosY(), RoadMark.width, RoadMark.height);
