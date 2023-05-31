@@ -1,129 +1,80 @@
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Player extends JPanel implements KeyListener, ActionListener {
-    public static final int width = 128;
-    public static final int height = 240;
+import javax.swing.*;
+
+public class Player extends JLabel implements ActionListener {
+    public static final int width = 64;
+    public static final int height = 120;
     private ImageIcon carImg;
-    private JLabel carLabel;
-    public static int posX = 272;
-    public static int posY = 320;
-    private final Timer timer = new Timer(1000, this);
-    // private static int newXLoc;
+    public static int posX = 100;
+    public static int posY = 448;
+    private final int[] availablePosX = {100, 176, 270, 346};
+    private int movementInt;
+    private int health;
+    private boolean isCollided;
+    private final Timer collideTimer = new Timer(1000, this);  // bar collide tak gawe invisible 1 detik
+    public int score = 0;   // sementara, sesuk diubah ke class sendiri
 
     public Player() {
+        setBounds(posX, posY, width, height);
         carImg = new ImageIcon("src/assets/Car.png");
-        carLabel = new JLabel(carImg);
-        carLabel.setBounds(posX, posY, width, height);
-        // System.out.println(posX + ", " + posY);
-        // add(carLabel);
-        // timer.start(); // test timer
-
-        // addKeyListener(new KeyListener() {
-        //     @Override
-        //     public void keyTyped(KeyEvent e) {
-        //         // TODO Auto-generated method stub
-                
-        //     }
-
-        //     @Override
-        //     public void keyPressed(KeyEvent e) {
-        //         // TODO Auto-generated method stub
-        //         int keyCode = e.getKeyCode();
-        //         switch (keyCode) {
-        //             case KeyEvent.VK_LEFT:
-        //                 Player.posX -= Player.width - 40;
-        //                 // Player.moveLeft();
-        //                 break;
-        //             case KeyEvent.VK_RIGHT:
-        //                 Player.posX += Player.width + 40;
-        //                 // Player.moveRight();
-        //                 break;
-        //         }
-        //         setLocation(Player.posX, Player.posY);
-        //     }
-
-        //     @Override
-        //     public void keyReleased(KeyEvent e) {
-        //         // TODO Auto-generated method stub
-                
-        //     }
-        // });
+        setIcon(carImg);
+        movementInt = 0;
+        health = 7;
+        isCollided = false;
     }
     
     public int getPosX() {
         return posX;
     }
-
-    // public void setPosX(int posX) {
-    //     this.posX = posX;
-    // }
-
     public int getPosY() {
         return posY;
     }
-
-    // public void setPosY(int posY) {
-    //     this.posY = posY;
-    // }
-
-    public JLabel getCarLabel() {
-        return this.carLabel;
+    public boolean isCollided() {
+        return isCollided;
+    }
+    public void decreaseHealth(int damage) {
+        this.isCollided = true;
+        if (health > 0) {
+            health -= damage;
+            System.out.println("Nyawa player: " + health);
+        }
+        else {
+            System.out.println("GAWE STATE GAME OVER");
+        }
+        collideTimer.start();
+    }
+    public boolean canMove() {
+        if (movementInt >= 0 && movementInt <= 3) {
+            return true;
+        }
+        return false;
     }
     public void moveRight() {
-        // newXLoc = posX + width + 40;
-        // toNewLoc();
-        // System.out.println(posX + ", " + newXLoc);
-        carLabel.setLocation(posX, posY);
-        // posX = newXLoc;
+        if (movementInt < 3) {
+            movementInt++;
+        }
+        if (canMove()) {
+            posX = availablePosX[movementInt];
+        }
+        setLocation(posX, posY);
     }
     public void moveLeft() {
-        // newXLoc = posX - width - 40;
-        // toNewLoc();
-        carLabel.setLocation(posX - width - 40, posY);
-        // posX = newXLoc;
-    }
-    // private void toNewLoc() {
-    //     timer.start();
-    // }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println(e + "pressed");
-        
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
+        if (movementInt > 0) {
+            movementInt--;
+        }
+        if (canMove()) {
+            posX = availablePosX[movementInt];
+        }
+        setLocation(posX, posY);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        // System.out.println(posX + ", " + newXLoc);
-        // if (posX < newXLoc) {
-        //     for (int i = posX; i <= newXLoc; i++) {
-        //         carLabel.setLocation(i, posY);
-        //     }
-        // }
-        // else if (posX > newXLoc) {
-        //     for (int i = newXLoc; i >= posX; i--) {
-        //         carLabel.setLocation(i, posY);
-        //     }
-        // }
-        // else {
-        //     timer.stop();
-        // }
+        this.isCollided = false;
+        collideTimer.stop();
     }
     
 }

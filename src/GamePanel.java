@@ -1,15 +1,12 @@
 import javax.swing.*;
-// import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class GamePanel extends JFrame implements Runnable {
     public final static int width = 512;    // screen width
     public final static int height = 640;   // screen height
     private Thread gameThread;
     private Background bg;
-    private Player player;
-    private ArrayList<RoadMark> roadMarks;
+    // private Player player;
 
     public GamePanel() {
         setTitle("Lampungzzzzzzz");
@@ -17,14 +14,12 @@ public class GamePanel extends JFrame implements Runnable {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // setLayout(null);
 
         bg = new Background();
-        player = new Player();
-        add(player.getCarLabel());
-
-        roadMarks = bg.getRoadMarks();
+        add(new ObstacleSpawner());
         add(bg);
-        startGame();
+        // startGame();
 
         addKeyListener(new KeyListener() {
             @Override
@@ -40,14 +35,13 @@ public class GamePanel extends JFrame implements Runnable {
                 switch (keyCode) {
                     case KeyEvent.VK_LEFT:
                         // Player.posX -= Player.width + 40;
-                        player.moveLeft();
+                        bg.getPlayer().moveLeft();
                         break;
                     case KeyEvent.VK_RIGHT:
                         // Player.posX += Player.width + 40;
-                        player.moveRight();
+                        bg.getPlayer().moveRight();
                         break;
                 }
-                // player.getCarLabel().setLocation(Player.posX, Player.posY);
             }
 
             @Override
@@ -66,21 +60,25 @@ public class GamePanel extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        JLabel jLabel = new JLabel("TEST");
-        jLabel.setBounds(280, 120, 500, 500);
-        bg.add(jLabel);
-        while (gameThread != null) {
-            // for (RoadMark rm : roadMarks) {
-            //     rm.setLocation(RoadMark.posX, rm.getPosY());
-            //     rm.addPosY();
-            // }
-            // try {
-            //     Thread.sleep(3); // 1 - 3?
-            // } catch (InterruptedException e) {
-            //     // TODO Auto-generated catch block
-            //     e.printStackTrace();
-            // }
-        }
+        // JLabel jLabel = new JLabel("TEST");
+        // jLabel.setBounds(280, 120, 500, 500);
+        // bg.add(jLabel);
+        // while (true) {
+        //     // bg.getRh().checkCollision(player);
+        //     // Rectangle playerBounds = player.getBounds();
+        //     // Rectangle rhBounds = bg.getRh().getBounds();
+        //     // System.out.println(playerBounds + ", " + rhBounds);
+        //     // if (player.getPosX() == bg.getRh().getPosX()) {
+        //     //     System.out.println(player.getPosX() + ", " + bg.getRh().getPosX());
+        //     // }
+        //     // if (playerBounds.intersects(rhBounds)) {
+        //     //     System.out.println("jeglongan");
+        //     // }
+        //     // System.out.println(Player.posX + ", " + bg.getRh().getPosX());
+        //     // if (bg.getRh().collision(player)) {
+        //     //     System.out.println("jeglongan");
+        //     // }
+        // }
     }
     
 }
