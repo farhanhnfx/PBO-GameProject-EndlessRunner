@@ -16,6 +16,7 @@ public class Background extends JLayeredPane implements ActionListener {
     private Timer timer;
     private RoadHole rh;
     private Player player;
+    private CollisionEffect fxScreen;
 
     public Background() {
         roadImg = new ImageIcon("src/assets/Road.png");
@@ -24,6 +25,9 @@ public class Background extends JLayeredPane implements ActionListener {
         setLayout(null);
 
         player = new Player();
+        fxScreen = new CollisionEffect();
+        add(fxScreen);
+
 
         roadMarks = new ArrayList<>();
         roadMarks.add(new RoadMark(0));
@@ -67,7 +71,8 @@ public class Background extends JLayeredPane implements ActionListener {
             rm.addPosY();
         }
         rh.addPosY();
-        rh.checkCollision(player);
+        rh.checkCollision(player,fxScreen);
+        moveToFront(fxScreen);
         player.score++;
         if (player.score%50 == 0) {
             System.out.println("SCORE: " + player.score);

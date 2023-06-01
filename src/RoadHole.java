@@ -38,5 +38,15 @@ public class RoadHole extends Obstacle implements ICollision {
             System.out.println("jeglong!");
         }
     }
+    public void checkCollision(Player player,CollisionEffect fx) {
+        if (!player.isCollided() && player.getBounds().intersects(getBounds())) {
+            player.decreaseHealth(damage);
+            System.out.println("jeglong!");
+            fx.displayDamageScreen();
+        }
+    }
+
+
+
     
 }
