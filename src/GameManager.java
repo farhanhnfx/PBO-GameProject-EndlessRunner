@@ -14,7 +14,7 @@ public class GameManager implements ActionListener {
         player = new Player();
         gameScore = 0;
         isGameOver = false;
-        timer = new Timer(100, this);
+        timer = new Timer(500, this);
         timer.start();
     }
     
@@ -24,7 +24,7 @@ public class GameManager implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        gameScore += 10;
+        gameScore += 5;
         board.updateScore(gameScore);
         // System.out.println("SCORE: " + gameScore);
         if (isGameOver) {
