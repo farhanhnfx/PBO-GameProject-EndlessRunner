@@ -29,7 +29,7 @@ public class Environment extends JLayeredPane implements ActionListener {
         
         // board = new Board();
         // add(board);
-        add(new Board());
+        add(GameManager.board);
         // GameManager gm = new GameManager();
 
         player = GameManager.player;
