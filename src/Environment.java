@@ -92,7 +92,6 @@ public class Environment extends JLayeredPane implements ActionListener {
             opsCar.detectOtherObstacle(rh2);
             // System.out.println("RH\t: (" + rh.getX() + ", " + rh.getY() + ")");
             // System.out.println("RH2\t: (" + rh2.getX() + ", " + rh2.getY() + ")");
-            // moveToFront(fxScreen);
         }
     }
 }
