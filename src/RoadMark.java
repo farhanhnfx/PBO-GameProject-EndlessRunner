@@ -21,7 +21,7 @@ public class RoadMark extends JPanel  {
         return posY;
     }
     public void addPosY() {
-        this.posY += 10;
+        this.posY += 8;
         if (this.posY > GamePanel.height + height) {
             posY = -height;
         }

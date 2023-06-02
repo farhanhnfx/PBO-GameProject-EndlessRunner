@@ -1,55 +1,26 @@
 import javax.swing.*;
-import java.awt.event.*;
 
 public class GamePanel extends JFrame implements Runnable {
     public final static int width = 512;    // screen width
     public final static int height = 640;   // screen height
     private Thread gameThread;
-    private Background bg;
+    private Environment bg;
     // private Player player;
 
     public GamePanel() {
-        setTitle("Lampungzzzzzzz");
+        setTitle("Lampung: Discover the best road");
         setSize(width, height);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // setLayout(null);
 
-        bg = new Background();
-        add(new ObstacleSpawner());
+        GameManager gm = new GameManager();
+        bg = new Environment();
+        // add(new ObstacleSpawner());
         add(bg);
         // startGame();
 
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // TODO Auto-generated method stub
-                int keyCode = e.getKeyCode();
-                switch (keyCode) {
-                    case KeyEvent.VK_LEFT:
-                        // Player.posX -= Player.width + 40;
-                        bg.getPlayer().moveLeft();
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        // Player.posX += Player.width + 40;
-                        bg.getPlayer().moveRight();
-                        break;
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
-                
-            }
-        });
         setVisible(true);
     }
     
