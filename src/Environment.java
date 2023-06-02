@@ -19,12 +19,16 @@ public class Environment extends JLayeredPane implements ActionListener {
     private Player player;
     private CollisionEffect fxScreen;
     private NonPlayableCar opsCar;
+    // private Board board;
 
     public Environment() {
         roadImg = new ImageIcon("src/assets/Road.png");
         roadLabel = new JLabel(roadImg);
         roadLabel.setBounds(80, 0, 352, 640);
         setLayout(null);
+        
+        // board = new Board();
+        // add(board);
 
         player = GameManager.player;
         fxScreen = new CollisionEffect();
@@ -38,7 +42,7 @@ public class Environment extends JLayeredPane implements ActionListener {
         roadMarks.add(new RoadMark(roadMarks.get(2).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(3).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(4).getPosY() + markGap));
-        rh = new RoadHole(-500, 1);
+        rh = new RoadHole(-4000, 1);
         rh2 = new RoadHole(-100, 2);
         add(player, 0);
         opsCar = new NonPlayableCar();

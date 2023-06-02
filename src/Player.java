@@ -26,7 +26,7 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         movementInt = randomPos;
         posX = availablePosX[randomPos];
         health = 7;
-        isCollided = true;
+        isCollided = false;
         setBounds(posX, posY, width, height);
         setFocusable(true);
         setVisible(true);

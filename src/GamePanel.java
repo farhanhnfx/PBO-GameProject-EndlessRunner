@@ -16,6 +16,7 @@ public class GamePanel extends JFrame implements Runnable {
         // setLayout(null);
 
         GameManager gm = new GameManager();
+        add(new Board());
         bg = new Environment();
         // add(new ObstacleSpawner());
         add(bg);
