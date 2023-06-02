@@ -23,7 +23,6 @@ public class GameManager implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         gameScore += 5;
         board.updateScore(gameScore);
         // System.out.println("SCORE: " + gameScore);

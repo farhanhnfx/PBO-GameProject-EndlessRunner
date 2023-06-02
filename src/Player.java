@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -61,6 +60,19 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         collideTimer.setRepeats(false);
         collideTimer.start();
     }
+
+    public void increaseHealth(int point) {
+        this.isCollided = true;
+        health += point;
+        if (health > 7) {
+            health = 7;
+            GameManager.board.updateHealth(health);
+        } else GameManager.board.updateHealth(health);
+        
+        collideTimer.setRepeats(false);
+        collideTimer.start();
+    }
+
     public boolean canMove() {
         if (movementInt >= 0 && movementInt <= 3 && !GameManager.isGameOver) {
             return true;
@@ -88,18 +100,16 @@ public class Player extends JLabel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         this.isCollided = false;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
@@ -115,7 +125,6 @@ public class Player extends JLabel implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
         
     }
     

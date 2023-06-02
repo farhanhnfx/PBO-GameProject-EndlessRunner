@@ -24,7 +24,6 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
 
     public NonPlayableCar() {
         super(7);
-        //TODO Auto-generated constructor stub
         // img = new ImageIcon("src/assets/Car_Red_Opposite.png");
         width = 64;
         height = 120;
@@ -69,7 +68,6 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
     }
     @Override
     protected void paintComponent(Graphics g) {
-        // TODO Auto-generated method stub
         super.paintComponent(g);
         g.setColor(Color.RED);
         g.drawRect(0, 0, width, height);
@@ -123,17 +121,14 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
     }
     @Override
     public void checkCollision(Player p, CollisionEffect fx) {
-        // TODO Auto-generated method stub
         if (!p.isCollided() && p.getBounds().intersects(getBounds())) {
             p.decreaseHealth(damage);
-            // System.out.println("jeglong!");
             fx.displayDamageScreen();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         obstacleAhead = false;
     }
     

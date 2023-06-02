@@ -14,11 +14,6 @@ public class CollisionEffect extends JPanel {
     Color healedScene;
 
 
-
-
-
-    // Create a JPanel to add the JLabel
-
     public CollisionEffect(){
         defaultScene = new Color(0,0,0,0);
         damagedScene = new Color(255,0,0,80);
@@ -31,6 +26,19 @@ public class CollisionEffect extends JPanel {
 
     public void displayDamageScreen(){
         setBackground(damagedScene);
+        Timer timer = new Timer(300, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                setBackground(defaultScene);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+        setVisible(true);
+    }
+
+    public void displayHealedScreen(){
+        setBackground(healedScene);
         Timer timer = new Timer(300, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
