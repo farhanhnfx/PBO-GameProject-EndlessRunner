@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -31,7 +32,8 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         setFocusable(true);
         setVisible(true);
         addKeyListener(this);
-        System.out.println("player spawn");
+        // System.out.println("player spawn");
+        GameManager.board.updateHealth(health);
     }
     
     public int getPosX() {
@@ -39,6 +41,9 @@ public class Player extends JLabel implements ActionListener, KeyListener {
     }
     public int getPosY() {
         return posY;
+    }
+    public int getHealth() {
+        return health;
     }
     public boolean isCollided() {
         return isCollided;
@@ -49,6 +54,10 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         if (health <= 0) {
             GameManager.isOver(true);
         }
+        if (health < 0) {
+            health = 0;
+        }
+        GameManager.board.updateHealth(health);
         collideTimer.setRepeats(false);
         collideTimer.start();
     }
