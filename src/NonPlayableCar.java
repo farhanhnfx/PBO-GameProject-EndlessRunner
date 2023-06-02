@@ -18,8 +18,8 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
     private int movementInt;
     private boolean obstacleAhead;
     private Timer timer = new Timer(500, this);
-    private String[] imgUrls = {"src/assets/Car_Red_Opposite.png", 
-                                "src/assets/Car_Blue_Opposite.png", "src/assets/Car_Yellow_Opposite.png"};
+    private String[] imgUrls = {"src/assets/Car_Red.png", 
+                                "src/assets/Car_Blue.png", "src/assets/Car_Yellow.png"};
     private JLabel label;
 
     public NonPlayableCar() {

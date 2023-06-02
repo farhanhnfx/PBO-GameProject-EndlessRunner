@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class Board extends JLabel {
     private ImageIcon img;
@@ -27,14 +26,14 @@ public class Board extends JLabel {
         color6 = new Color(144, 223, 44);
         color7 = new Color(32, 207, 49);
 
-        // img = new ImageIcon("src/assets/BgBoard.png");
+        img = new ImageIcon("src/assets/BgBoard.png");
         setBounds(16, 16, 144, 112);
-        // setIcon(img);
+        setIcon(img);
 
-        // displayScore();
-        // score();
-        // engineImg();
-        // engineText();
+        displayScore();
+        score();
+        engineImg();
+        engineText();
     }
 
     @Override
@@ -46,15 +45,15 @@ public class Board extends JLabel {
     public void displayScore() {
         JLabel font = new JLabel("Score");
         font.setBounds(16, 13, 29, 15);
-        font.setFont(new Font("Poppins", Font.PLAIN, 10));
+        font.setFont(new Font("Arial", Font.PLAIN, 10));
         font.setForeground(Color.WHITE);
         add(font);
     }
 
     public void score() {
-        JLabel font = new JLabel("0");
+        JLabel font = new JLabel("0"); // Integer.toString(9999)
         font.setBounds(16, 26, 112, 30);
-        font.setFont(new Font("Poppins", Font.BOLD, 20));
+        font.setFont(new Font("Arial", Font.BOLD, 20));
         font.setForeground(Color.WHITE);
         add(font);
     }
@@ -68,7 +67,7 @@ public class Board extends JLabel {
     public void engineText() {
         JLabel font = new JLabel("Engine");
         font.setBounds(35, 59, 33, 15);
-        font.setFont(new Font("Poppins", Font.PLAIN, 10));
+        font.setFont(new Font("Arial", Font.PLAIN, 10));
         font.setForeground(Color.WHITE);
         add(font);
     }

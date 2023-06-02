@@ -1,56 +1,61 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GamePanel extends JFrame implements Runnable {
+public class GamePanel extends JFrame  {
     public final static int width = 512;    // screen width
     public final static int height = 640;   // screen height
-    private Thread gameThread;
-    private Environment bg;
-    // private Player player;
+    private JLabel bg;
+    private JPanel mainPanel;
+    private Environment env;
 
     public GamePanel() {
         setTitle("Lampung: Discover the best road");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(width, height);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // setLayout(null);
 
         GameManager gm = new GameManager();
-        add(new Board());
-        bg = new Environment();
-        // add(new ObstacleSpawner());
+        
+        ImageIcon bgImage = new ImageIcon("src/assets/background.jpg");
+        bg = new JLabel(bgImage);
+        bg.setBounds(0, 0, 512, 640);
         add(bg);
-        // startGame();
 
+        mainPanel = new JPanel();
+        mainPanel.setOpaque(false);
+        mainPanel.setBounds(0, 0, 512, 640);
+        mainPanel.setLayout(null);
+        bg.add(mainPanel);
+
+        JButton startButton = new JButton();
+        startButton.setBounds(129, 480, 255, 62);
+        startButton.setText("Start The Game");
+        startButton.setForeground(Color.white);
+        startButton.setBackground(Color.green);
+        startButton.setFont(new java.awt.Font("Arial", Font.BOLD, 25));
+        startButton.setBorder(null);
+        startButton.setFocusPainted(false);
+        startButton.setOpaque(true);
+        mainPanel.add(startButton);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startGame();
+            }
+        });
         setVisible(true);
     }
     
-    public void startGame() {
-        gameThread = new Thread(this);
-        gameThread.start(); // akan memanggil run
-    }
+    private void startGame() {
+        env = new Environment();
+        env.setSize(width, height);
+        env.setVisible(true);
+        add(env);
 
-    @Override
-    public void run() {
-        // JLabel jLabel = new JLabel("TEST");
-        // jLabel.setBounds(280, 120, 500, 500);
-        // bg.add(jLabel);
-        // while (true) {
-        //     // bg.getRh().checkCollision(player);
-        //     // Rectangle playerBounds = player.getBounds();
-        //     // Rectangle rhBounds = bg.getRh().getBounds();
-        //     // System.out.println(playerBounds + ", " + rhBounds);
-        //     // if (player.getPosX() == bg.getRh().getPosX()) {
-        //     //     System.out.println(player.getPosX() + ", " + bg.getRh().getPosX());
-        //     // }
-        //     // if (playerBounds.intersects(rhBounds)) {
-        //     //     System.out.println("jeglongan");
-        //     // }
-        //     // System.out.println(Player.posX + ", " + bg.getRh().getPosX());
-        //     // if (bg.getRh().collision(player)) {
-        //     //     System.out.println("jeglongan");
-        //     // }
-        // }
+        bg.setVisible(false);
     }
     
 }

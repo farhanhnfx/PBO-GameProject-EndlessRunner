@@ -31,6 +31,7 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         setFocusable(true);
         setVisible(true);
         addKeyListener(this);
+        System.out.println("player spawn");
     }
     
     public int getPosX() {

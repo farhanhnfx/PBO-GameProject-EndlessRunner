@@ -29,6 +29,8 @@ public class Environment extends JLayeredPane implements ActionListener {
         
         // board = new Board();
         // add(board);
+        add(new Board());
+        // GameManager gm = new GameManager();
 
         player = GameManager.player;
         fxScreen = new CollisionEffect();
@@ -56,6 +58,8 @@ public class Environment extends JLayeredPane implements ActionListener {
 
         timer = new Timer(15, this);
         timer.start();
+
+        // setVisible(true);
     }
     public Player getPlayer() {
         return player;
