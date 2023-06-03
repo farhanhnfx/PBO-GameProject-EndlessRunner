@@ -15,7 +15,6 @@ public class Bar extends JLabel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        // TODO Auto-generated method stub
         super.paintComponent(g);
         g.setColor(color);
         g.fillRect(0, 0, width, width);

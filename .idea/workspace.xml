@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e19fbe59-6a41-4224-a53e-635951b81efe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/CollisionEffect$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/CollisionEffect$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/CollisionEffect.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/CollisionEffect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Environment.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Environment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GamePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GamePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ICollision.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ICollision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/NonPlayableCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/NonPlayableCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Obstacle.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Obstacle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ObstacleSpawner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RoadHole.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/RoadHole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/RoadMark.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/RoadMark.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QeWfXxbXIiLLMt5vCni4R1yPxl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e19fbe59-6a41-4224-a53e-635951b81efe" name="Changes" comment="" />
+      <created>1685714639228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685714639228</updated>
+    </task>
+    <servers />
+  </component>
+</project>

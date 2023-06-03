@@ -19,6 +19,7 @@ public class Environment extends JLayeredPane implements ActionListener {
     private Player player;
     private CollisionEffect fxScreen;
     private NonPlayableCar opsCar;
+    private PowerUp healObj;
     // private Board board;
 
     public Environment() {
@@ -27,46 +28,53 @@ public class Environment extends JLayeredPane implements ActionListener {
         roadLabel.setBounds(80, 0, 352, 640);
         setLayout(null);
         
-        // board = new Board();
-        // add(board);
-        add(GameManager.board);
-        // GameManager gm = new GameManager();
 
         player = GameManager.player;
+
+        //Object Declaration
         fxScreen = new CollisionEffect();
-        add(fxScreen);
-
-
+        opsCar = new NonPlayableCar();
         roadMarks = new ArrayList<>();
+        rh = new RoadHole(-4000, 1);
+        rh2 = new RoadHole(-100, 2);
+        healObj = new PowerUp(-5000);
+
+
         roadMarks.add(new RoadMark(0));
         roadMarks.add(new RoadMark(roadMarks.get(0).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(1).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(2).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(3).getPosY() + markGap));
         roadMarks.add(new RoadMark(roadMarks.get(4).getPosY() + markGap));
-        rh = new RoadHole(-4000, 1);
-        rh2 = new RoadHole(-100, 2);
+
+        //Adding object to the panel
+        add(GameManager.board);
         add(player, 0);
-        opsCar = new NonPlayableCar();
+        add(fxScreen);
         add(opsCar, -1);
         add(rh, -1);
         add(rh2, -1);
+        add(healObj, -1);
+
         for (RoadMark rm : roadMarks) {
             add(rm, -1);    // add to background
         }
         add(roadLabel, -1);
-
         timer = new Timer(15, this);
         timer.start();
 
         // setVisible(true);
     }
+
+
     public Player getPlayer() {
         return player;
     }
     public ArrayList<RoadMark> getRoadMarks() {
         return this.roadMarks;
     }
+
+
     @Override   // draw background
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -75,24 +83,29 @@ public class Environment extends JLayeredPane implements ActionListener {
         g.fillRect(roadWidth+sideWidth, 0, sideWidth, height);
         moveToBack(this);
     }
+
+    //Automation Handling
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if (!GameManager.isGameOver) {
             for (RoadMark rm : roadMarks) {
                 rm.addPosY();
             }
+
             rh.addPosY();
             rh2.addPosY();
+            opsCar.addPosY();
+            healObj.addPosY();
+
             rh.checkCollision(player,fxScreen);
             rh2.checkCollision(player, fxScreen);
-            opsCar.addPosY();
             opsCar.checkCollision(player, fxScreen);
+            healObj.checkCollision(player, fxScreen);
+
             opsCar.detectOtherObstacle(rh);
             opsCar.detectOtherObstacle(rh2);
             // System.out.println("RH\t: (" + rh.getX() + ", " + rh.getY() + ")");
             // System.out.println("RH2\t: (" + rh2.getX() + ", " + rh2.getY() + ")");
-            // moveToFront(fxScreen);
         }
     }
 }
