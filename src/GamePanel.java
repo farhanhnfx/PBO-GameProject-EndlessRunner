@@ -61,18 +61,9 @@ public class GamePanel extends JFrame {
             }
         });
 
-        // add font bold
-        try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/Poppins-Bold.ttf"));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-
         countdownLabel = new JLabel();
         countdownLabel.setBounds(0, 250, width, 100);
-        countdownLabel.setFont(new Font("Poppins", Font.BOLD, 90));
+        countdownLabel.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 90));
         countdownLabel.setForeground(new Color(253, 187, 60));
         countdownLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(countdownLabel);
