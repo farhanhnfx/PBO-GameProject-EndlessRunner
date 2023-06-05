@@ -52,12 +52,6 @@ public class GamePanel extends JFrame {
         gameOverPanel.setLayout(null);
         gameOverPanel.setVisible(false);
 
-        JLabel goText = new JLabel();
-        goText.setBackground(Color.RED);
-        goText.setBounds(65, 192, 400, 92);
-        System.out.println(goText.getBounds());
-        gameOverPanel.add(goText);
-
         gameOver = new JLabel("GAME OVER!");
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
         gameOver.setForeground(new Color(255, 255, 255));
@@ -65,6 +59,12 @@ public class GamePanel extends JFrame {
         gameOver.setBounds(97, 202, 302, 72);
         gameOverPanel.add(gameOver);
 
+        JLabel goText = new JLabel();
+        goText.setBackground(Color.RED);
+        goText.setOpaque(true);
+        goText.setBounds(65, 192, 400, 92);
+        System.out.println(goText.getBounds());
+        gameOverPanel.add(goText);
 
         yourScore = new JLabel("YOUR FINAL SCORE");
         yourScore.setHorizontalAlignment(SwingConstants.CENTER);
