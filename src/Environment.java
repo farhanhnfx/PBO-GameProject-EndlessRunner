@@ -14,11 +14,11 @@ public class Environment extends JLayeredPane implements ActionListener {
     private ImageIcon roadImg;
     private JLabel roadLabel;
     private Timer timer;
-    private RoadHole rh;
-    private RoadHole rh2;
+    public RoadHole rh;
+    public RoadHole rh2;
     private Player player;
     private CollisionEffect fxScreen;
-    private NonPlayableCar opsCar;
+    public NonPlayableCar npCar;
     private PowerUp healObj;
     // private Board board;
 
@@ -33,10 +33,10 @@ public class Environment extends JLayeredPane implements ActionListener {
 
         //Object Declaration
         fxScreen = new CollisionEffect();
-        opsCar = new NonPlayableCar();
+        npCar = new NonPlayableCar();
         roadMarks = new ArrayList<>();
-        rh = new RoadHole(-4000, 1);
-        rh2 = new RoadHole(-100, 2);
+        rh = new RoadHole(-100, 1);
+        rh2 = new RoadHole(-700, 2);
         healObj = new PowerUp(-5000);
 
 
@@ -51,7 +51,7 @@ public class Environment extends JLayeredPane implements ActionListener {
         add(GameManager.board);
         add(player, 0);
         add(fxScreen);
-        add(opsCar, -1);
+        add(npCar, -1);
         add(rh, -1);
         add(rh2, -1);
         add(healObj, -1);
@@ -62,8 +62,6 @@ public class Environment extends JLayeredPane implements ActionListener {
         add(roadLabel, -1);
         timer = new Timer(15, this);
         timer.start();
-
-        // setVisible(true);
     }
 
 
@@ -94,18 +92,16 @@ public class Environment extends JLayeredPane implements ActionListener {
 
             rh.addPosY();
             rh2.addPosY();
-            opsCar.addPosY();
+            npCar.addPosY();
             healObj.addPosY();
 
             rh.checkCollision(player,fxScreen);
             rh2.checkCollision(player, fxScreen);
-            opsCar.checkCollision(player, fxScreen);
+            npCar.checkCollision(player, fxScreen);
             healObj.checkCollision(player, fxScreen);
 
-            opsCar.detectOtherObstacle(rh);
-            opsCar.detectOtherObstacle(rh2);
-            // System.out.println("RH\t: (" + rh.getX() + ", " + rh.getY() + ")");
-            // System.out.println("RH2\t: (" + rh2.getX() + ", " + rh2.getY() + ")");
+            npCar.detectOtherObstacle(rh);
+            npCar.detectOtherObstacle(rh2);
         }
     }
 }

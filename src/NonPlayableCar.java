@@ -2,24 +2,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-public class NonPlayableCar extends Obstacle implements ICollision, ActionListener {
+public class NonPlayableCar extends ColliderObject implements ICollision, ActionListener {
     private int posX;
     private int posY;
     private int[] availablePosX = {100, 176, 270, 346};
-    private Random random;
     private int randIdx;
     private int initPosY;
     private int movementInt;
     private boolean obstacleAhead;
     private Timer timer = new Timer(500, this);
-    private String[] imgUrls = {"src/assets/Car_Red.png", 
-                                "src/assets/Car_Blue.png", "src/assets/Car_Yellow.png"};
+    private final ImageIcon[] carImgs = ResourceManager.NPC_CARS;
     private JLabel label;
 
     public NonPlayableCar() {
@@ -29,23 +26,24 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
         height = 120;
         // initPosY = 1000; // if from bottom to up
         // posY = 1000;
-        initPosY = -500;
-        posY = -500;
-        random = new Random();
-        posX = getRandomX();
-        img = getRandomImg();
-        obstacleAhead = false;
         
         label = new JLabel();
         label.setBounds(0, 0, width, height);
         label.setBackground(Color.RED);
         add(label);
         
-        setIcon(img);
-        setBounds(posX, 100, width, height);
+        spawn();
         timer.setRepeats(false);
     }
-    
+
+    public void spawn() {
+        initPosY = -500;
+        posY = -500;
+        posX = getRandomX();
+        obstacleAhead = false;
+        setBounds(posX, 100, width, height);
+        setIcon(getRandomImg());
+    }
     public void addPosY() {
         // this.posY -= 6; // if from bottom to up
         this.posY += 12; // if from up to bottom
@@ -58,13 +56,13 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
         setLocation(posX, posY);
     }
     private int getRandomX() {
-        randIdx = random.nextInt(availablePosX.length);
+        randIdx = GameManager.rand.nextInt(availablePosX.length);
         movementInt = randIdx;
         return availablePosX[randIdx];
     }
     private ImageIcon getRandomImg() {
-        randIdx = random.nextInt(imgUrls.length);
-        return new ImageIcon(imgUrls[randIdx]);
+        randIdx = GameManager.rand.nextInt(carImgs.length);
+        return carImgs[randIdx];
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -97,7 +95,7 @@ public class NonPlayableCar extends Obstacle implements ICollision, ActionListen
         }
         setLocation(posX, posY);
     }
-    public void detectOtherObstacle(Obstacle o) {
+    public void detectOtherObstacle(ColliderObject o) {
         if (getBounds().intersects(o.getBounds()) && !obstacleAhead) {
             obstacleAhead = true;
             timer.start();

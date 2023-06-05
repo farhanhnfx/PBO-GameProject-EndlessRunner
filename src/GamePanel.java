@@ -2,20 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 public class GamePanel extends JFrame {
     public final static int width = 512;    // lebar layar
     public final static int height = 640;   // tinggi layar
     private JLabel bg;
     private JPanel mainPanel;
-    private Environment env;
+    // private Environment env;
 
     private JLabel countdownLabel;
     private int countdownValue = 4;
     private Timer countdownTimer;
     private JButton startButton;
+    private JButton retryButton;
+    public static JPanel gameOverPanel;
+    public static JLabel finalScoreText;
+    public static JLabel yourScore;
+    public static JLabel gameOver;
+    private GameManager gm;
 
     public GamePanel() {
         setTitle("Lampung: Discover the best road");
@@ -24,7 +28,7 @@ public class GamePanel extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        GameManager gm = new GameManager();
+        gm = new GameManager();
 
         ImageIcon bgTitle = new ImageIcon("src/assets/title.png");
         JLabel labelTitle = new JLabel(bgTitle);
@@ -38,9 +42,64 @@ public class GamePanel extends JFrame {
 
         mainPanel = new JPanel();
         mainPanel.setOpaque(false);
-        mainPanel.setBounds(0, 0, 512, 640);
+        mainPanel.setBounds(0, 0, width, height);
         mainPanel.setLayout(null);
         bg.add(mainPanel);
+
+        gameOverPanel = new JPanel();
+        gameOverPanel.setBounds(0, 0, width, height);
+        gameOverPanel.setBackground(new Color(0, 0, 0, 230));
+        gameOverPanel.setLayout(null);
+        gameOverPanel.setVisible(false);
+
+        JLabel goText = new JLabel();
+        goText.setBackground(Color.RED);
+        goText.setBounds(65, 192, 400, 92);
+        System.out.println(goText.getBounds());
+        gameOverPanel.add(goText);
+
+        gameOver = new JLabel("GAME OVER!");
+        gameOver.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOver.setForeground(new Color(255, 255, 255));
+        gameOver.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 48));
+        gameOver.setBounds(97, 202, 302, 72);
+        gameOverPanel.add(gameOver);
+
+
+        yourScore = new JLabel("YOUR FINAL SCORE");
+        yourScore.setHorizontalAlignment(SwingConstants.CENTER);
+        yourScore.setForeground(new Color(255, 255, 255));
+        yourScore.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 24));
+        yourScore.setBounds(150, 300, 214, 36);
+        gameOverPanel.add(yourScore);
+
+        finalScoreText = new JLabel("0");
+        finalScoreText.setHorizontalAlignment(SwingConstants.CENTER);
+        finalScoreText.setForeground(new Color(253, 187, 60));
+        finalScoreText.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 90));
+        finalScoreText.setBounds(156, 329, 200, 135);
+        gameOverPanel.add(finalScoreText);
+
+        add(gameOverPanel);
+        retryButton = new JButton();
+        retryButton.setBounds(167, 500, 179, 62);
+        retryButton.setText("Try Again");
+        retryButton.setForeground(Color.white);
+        retryButton.setBackground(Color.green);
+        retryButton.setFont(new Font("Arial", Font.BOLD, 25));
+        retryButton.setBorder(null);
+        retryButton.setFocusPainted(false);
+        retryButton.setOpaque(true);
+        gameOverPanel.add(retryButton);
+        retryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                retryButton.setVisible(false);
+                labelTitle.setVisible(false);
+                GamePanel.gameOverPanel.setVisible(false);
+                startCountdownRetry();
+            }
+        });
 
         startButton = new JButton();
         startButton.setBounds(129, 480, 255, 62);
@@ -89,10 +148,35 @@ public class GamePanel extends JFrame {
     }
 
     private void startGame() {
-        env = new Environment();
-        env.setSize(width, height);
-        env.setVisible(true);
-        add(env);
+        gm.start();
+        // env = new Environment();
+        // env.setSize(width, height);
+        // env.setVisible(true);
+        add(GameManager.env);
+
+        bg.setVisible(false);
+    }
+
+    private void startCountdownRetry() {
+        countdownTimer = new Timer(1250, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                countdownValue--;
+                countdownLabel.setText(String.valueOf(countdownValue));
+                if (countdownValue < 0) {
+                    countdownTimer.stop();
+                    restartGame();
+                } else if (countdownValue == 0) {
+                    countdownLabel.setText("GO!");
+                }
+            }
+        });
+        countdownTimer.start();
+    }
+
+    private void restartGame() {
+        retryButton.setVisible(true);
+        gm.restart();
 
         bg.setVisible(false);
     }

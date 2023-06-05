@@ -70,12 +70,15 @@ public class PowerUp extends JLabel implements ICollision{
     public void tempExitAnimation(){
         Timer timer = new Timer(3000, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-                setVisible(true);;
+                setVisible(true);
+                // setIcon(img);
             }
         });
         timer.setRepeats(false);
         timer.start();
-        setVisible(false);;
+        setVisible(false);
+        // setIcon(img_exit);
+        // setSize(img_exit.getIconWidth(), img_exit.getIconHeight());
     }
 
     

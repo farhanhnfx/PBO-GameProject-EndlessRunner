@@ -1,25 +1,58 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GameManager implements ActionListener {
     public static int gameScore;
     public static boolean isGameOver;
     public static Player player;
-    private Timer timer;
+    private static Timer timer;
     public static Board board;
+    public static Random rand;
+    public static Environment env;
 
     public GameManager() {
+        rand = new Random();
         board = new Board();
         player = new Player();
-        gameScore = 0;
-        isGameOver = false;
         timer = new Timer(500, this);
-        timer.start();
     }
     
     public static void isOver(boolean isOver) {
         isGameOver = isOver;
+        if (isOver) {
+            // add game over panel
+            // if press restart then do
+            // player respawn
+            // player.spawn();
+            // gameScore = 0;
+            // isGameOver = false;
+            // timer.start();
+            // System.out.println("RESTARTED || PLAYER RESPAWN");
+            // nek ora
+            // GamePanel implements Runnable
+            // cek isGameOver jedulke game over panel
+        }
+    }
+    public void start() {
+        gameScore = 0;
+        isGameOver = false;
+        env = new Environment();
+        env.setSize(GamePanel.width, GamePanel.height);
+        env.setVisible(true);
+        timer.start();
+    }
+    public void restart() {
+        gameScore = 0;
+        isGameOver = false;
+        timer.start();
+        player.spawn();
+        env.rh.spawn();
+        env.rh2.spawn();
+        env.npCar.spawn();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -27,6 +60,9 @@ public class GameManager implements ActionListener {
         board.updateScore(gameScore);
         // System.out.println("SCORE: " + gameScore);
         if (isGameOver) {
+            System.out.println("isGameOver: " + isGameOver);
+            GamePanel.finalScoreText.setText(Integer.toString(gameScore));
+            GamePanel.gameOverPanel.setVisible(true);
             timer.stop();
         }
     }

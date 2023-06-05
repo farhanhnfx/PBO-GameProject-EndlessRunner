@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public abstract class Obstacle extends JLabel {
+public abstract class ColliderObject extends JLabel {
     protected int damage;
     protected ImageIcon img;
     protected final int posX = 100;
@@ -8,7 +8,7 @@ public abstract class Obstacle extends JLabel {
     protected int width;
     protected int height;
     
-    public Obstacle(int damage) {
+    public ColliderObject(int damage) {
         this.damage = damage;
     }
 }
