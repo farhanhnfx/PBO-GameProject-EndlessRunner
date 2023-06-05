@@ -7,10 +7,10 @@ public class GameManager implements ActionListener {
     public static int gameScore;
     public static boolean isGameOver;
     public static Player player;
-    private static Timer timer;
     public static Board board;
     public static Random rand;
     public static Environment env;
+    private Timer timer;
 
     public GameManager() {
         rand = new Random();
@@ -19,22 +19,6 @@ public class GameManager implements ActionListener {
         timer = new Timer(500, this);
     }
     
-    public static void isOver(boolean isOver) {
-        isGameOver = isOver;
-        if (isOver) {
-            // add game over panel
-            // if press restart then do
-            // player respawn
-            // player.spawn();
-            // gameScore = 0;
-            // isGameOver = false;
-            // timer.start();
-            // System.out.println("RESTARTED || PLAYER RESPAWN");
-            // nek ora
-            // GamePanel implements Runnable
-            // cek isGameOver jedulke game over panel
-        }
-    }
     public void start() {
         gameScore = 0;
         isGameOver = false;
@@ -58,9 +42,9 @@ public class GameManager implements ActionListener {
         board.updateScore(gameScore);
         // System.out.println("SCORE: " + gameScore);
         if (isGameOver) {
-            System.out.println("isGameOver: " + isGameOver);
-            GamePanel.finalScoreText.setText(Integer.toString(gameScore));
-            GamePanel.gameOverPanel.setVisible(true);
+            // System.out.println("isGameOver: " + isGameOver);
+            // GamePanel.finalScoreText.setText(Integer.toString(gameScore));
+            // GamePanel.gameOverPanel.setVisible(true);
             timer.stop();
         }
     }

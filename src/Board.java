@@ -70,9 +70,6 @@ public class Board extends JLabel {
     public void updateScore(int score) {
         scoreLabel.setText(Integer.toString(score));
     }
-    public void decreaseHealth(int health) {
-        
-    }
 
     public void engineImg() {
         JLabel img = new JLabel(new ImageIcon("src/assets/engine.png"));

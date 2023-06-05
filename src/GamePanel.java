@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GamePanel extends JFrame {
+public class GamePanel extends JFrame implements ActionListener {
     public final static int width = 512;    // lebar layar
     public final static int height = 640;   // tinggi layar
     private JLabel bg;
@@ -18,8 +18,10 @@ public class GamePanel extends JFrame {
     public static JPanel gameOverPanel;
     public static JLabel finalScoreText;
     public static JLabel yourScore;
-    public static JLabel gameOver;
+    public static JLabel gameOverText;
     private GameManager gm;
+    private Timer timer;
+    private final Color btnColor = new Color(29, 154, 34);
 
     public GamePanel() {
         setTitle("Lampung: Discover the best road");
@@ -30,9 +32,16 @@ public class GamePanel extends JFrame {
 
         gm = new GameManager();
 
-        ImageIcon bgTitle = new ImageIcon("src/assets/title.png");
+        ImageIcon bgTitle = new ImageIcon("src/assets/title2.png");
         JLabel labelTitle = new JLabel(bgTitle);
-        labelTitle.setBounds(77, 107, 359, 309);
+        labelTitle.setLayout(null);
+        JLabel titleDesc = new JLabel("Discover the best road!");
+        titleDesc.setHorizontalAlignment(SwingConstants.CENTER);
+        titleDesc.setForeground(new Color(255, 255, 255));
+        titleDesc.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 24));
+        titleDesc.setBounds(30, 265, 302, 72);
+        labelTitle.setBounds(77, 70, 359, 320);
+        labelTitle.add(titleDesc);
         add(labelTitle);
 
         ImageIcon bgImage = new ImageIcon("src/assets/background.jpg");
@@ -52,41 +61,40 @@ public class GamePanel extends JFrame {
         gameOverPanel.setLayout(null);
         gameOverPanel.setVisible(false);
 
-        gameOver = new JLabel("GAME OVER!");
-        gameOver.setHorizontalAlignment(SwingConstants.CENTER);
-        gameOver.setForeground(new Color(255, 255, 255));
-        gameOver.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 48));
-        gameOver.setBounds(97, 202, 302, 72);
-        gameOverPanel.add(gameOver);
+        gameOverText = new JLabel("GAME OVER!");
+        gameOverText.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOverText.setForeground(new Color(255, 255, 255));
+        gameOverText.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 48));
+        gameOverText.setBounds(97, 142, 302, 72);
+        gameOverPanel.add(gameOverText);
 
-        JLabel goText = new JLabel();
-        goText.setBackground(Color.RED);
-        goText.setOpaque(true);
-        goText.setBounds(65, 192, 400, 92);
-        System.out.println(goText.getBounds());
-        gameOverPanel.add(goText);
+        JLabel goTextBg = new JLabel();
+        goTextBg.setBackground(Color.RED);
+        goTextBg.setOpaque(true);
+        goTextBg.setBounds(48, 132, 416, 92);
+        gameOverPanel.add(goTextBg);
 
         yourScore = new JLabel("YOUR FINAL SCORE");
         yourScore.setHorizontalAlignment(SwingConstants.CENTER);
         yourScore.setForeground(new Color(255, 255, 255));
         yourScore.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 24));
-        yourScore.setBounds(150, 300, 214, 36);
+        yourScore.setBounds(150, 270, 214, 36);
         gameOverPanel.add(yourScore);
 
         finalScoreText = new JLabel("0");
         finalScoreText.setHorizontalAlignment(SwingConstants.CENTER);
         finalScoreText.setForeground(new Color(253, 187, 60));
         finalScoreText.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 90));
-        finalScoreText.setBounds(156, 329, 200, 135);
+        finalScoreText.setBounds(156, 300, 200, 135);
         gameOverPanel.add(finalScoreText);
 
         add(gameOverPanel);
         retryButton = new JButton();
-        retryButton.setBounds(167, 500, 179, 62);
+        retryButton.setBounds(167, 450, 179, 62);
         retryButton.setText("Try Again");
         retryButton.setForeground(Color.white);
-        retryButton.setBackground(Color.green);
-        retryButton.setFont(new Font("Arial", Font.BOLD, 25));
+        retryButton.setBackground(btnColor);
+        retryButton.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 24));
         retryButton.setBorder(null);
         retryButton.setFocusPainted(false);
         retryButton.setOpaque(true);
@@ -102,11 +110,11 @@ public class GamePanel extends JFrame {
         });
 
         startButton = new JButton();
-        startButton.setBounds(129, 480, 255, 62);
+        startButton.setBounds(128, 450, 255, 62);
         startButton.setText("Start The Game");
         startButton.setForeground(Color.white);
-        startButton.setBackground(Color.green);
-        startButton.setFont(new Font("Arial", Font.BOLD, 25));
+        startButton.setBackground(btnColor);
+        startButton.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 24));
         startButton.setBorder(null);
         startButton.setFocusPainted(false);
         startButton.setOpaque(true);
@@ -119,6 +127,8 @@ public class GamePanel extends JFrame {
                 startCountdown(false);
             }
         });
+
+        timer = new Timer(10, this);
 
         countdownLabel = new JLabel();
         countdownLabel.setBounds(0, 250, width, 100);
@@ -140,18 +150,21 @@ public class GamePanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 countdownValue--;
-                if (countdownValue < 0) {
-                    countdownTimer.stop();
-                    if (!restart) {
-                        startGame();
-                    } else {
-                        restartGame();
-                    }
-                } else if(countdownValue == 0){
+                if (countdownValue > 0) {
+                    countdownLabel.setText(String.valueOf(countdownValue));
+                }
+                else if (countdownValue == 0 ) {
                     countdownLabel.setText("GO!");
                 }
                 else {
-                    countdownLabel.setText(String.valueOf(countdownValue));
+                    countdownTimer.stop();
+                    timer.start();
+                    if (!restart) {
+                        startGame();
+                    }
+                    else {
+                        restartGame();
+                    }
                 }
             }
         });
@@ -171,5 +184,16 @@ public class GamePanel extends JFrame {
         gm.restart();
 
         bg.setVisible(false);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        if (GameManager.isGameOver) {
+            // System.out.println("overrrrrrrrrrrrr");
+            finalScoreText.setText(Integer.toString(GameManager.gameScore));
+            gameOverPanel.setVisible(true);
+            timer.stop();
+        }
     }
 }

@@ -30,7 +30,6 @@ public class RoadHole extends ColliderObject implements ICollision {
         // this.initPosY = posY;
         // this.posY = initPosY;
         setBounds(posX, initPosY, width, height);
-        // System.out.println(posX + ", " + posY);
     }
     public void addPosY() {
         this.posY += 8;
@@ -52,8 +51,5 @@ public class RoadHole extends ColliderObject implements ICollision {
             fx.displayDamageScreen();
         }
     }
-
-
-
     
 }

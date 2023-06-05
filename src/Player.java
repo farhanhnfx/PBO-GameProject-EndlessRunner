@@ -15,6 +15,7 @@ public class Player extends JLabel implements ActionListener, KeyListener {
     private int health;
     private boolean isCollided;
     private final Timer collideTimer = new Timer(600, this);  // bar collide tak gawe invisible 0.5 detik
+    private final int MAX_HEALTH = 7;
 
     public Player() {
         carImg = ResourceManager.PLAYER_CAR;
@@ -38,7 +39,7 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         int randomPos = GameManager.rand.nextInt(availablePosX.length);
         movementInt = randomPos;
         posX = availablePosX[randomPos];
-        health = 7;
+        health = MAX_HEALTH;
         isCollided = false;
         setBounds(posX, posY, width, height);
         GameManager.board.updateHealth(health);
@@ -51,7 +52,7 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         health -= damage;
         if (health <= 0) {
             health = 0;
-            GameManager.isOver(true);
+            GameManager.isGameOver = true;
         }
         GameManager.board.updateHealth(health);
         collideTimer.setRepeats(false);
@@ -62,10 +63,9 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         this.isCollided = true;
         health += point;
         if (health > 7) {
-            health = 7;
-            GameManager.board.updateHealth(health);
-        } else GameManager.board.updateHealth(health);
-        
+            health = MAX_HEALTH;
+        }
+        GameManager.board.updateHealth(health);
         collideTimer.setRepeats(false);
         collideTimer.start();
     }
@@ -110,11 +110,15 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
-                // Player.posX -= Player.width + 40;
                 moveLeft();
                 break;
+            case KeyEvent.VK_A:
+                moveLeft();
+                break;
+            case KeyEvent.VK_D:
+                moveRight();
+                break;
             case KeyEvent.VK_RIGHT:
-                // Player.posX += Player.width + 40;
                 moveRight();
                 break;
         }
