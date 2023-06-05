@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GameManager implements ActionListener {

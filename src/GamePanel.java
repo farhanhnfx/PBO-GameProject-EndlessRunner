@@ -11,7 +11,7 @@ public class GamePanel extends JFrame {
     // private Environment env;
 
     private JLabel countdownLabel;
-    private int countdownValue = 4;
+    private int countdownValue;
     private Timer countdownTimer;
     private JButton startButton;
     private JButton retryButton;
@@ -97,7 +97,7 @@ public class GamePanel extends JFrame {
                 retryButton.setVisible(false);
                 labelTitle.setVisible(false);
                 GamePanel.gameOverPanel.setVisible(false);
-                startCountdownRetry();
+                startCountdown(true);
             }
         });
 
@@ -116,7 +116,7 @@ public class GamePanel extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 startButton.setBounds(0, 0, 0, 0);
                 labelTitle.setVisible(false);
-                startCountdown();
+                startCountdown(false);
             }
         });
 
@@ -130,7 +130,8 @@ public class GamePanel extends JFrame {
         setVisible(true);
     }
 
-    private void startCountdown() {
+    private void startCountdown(boolean restart) {
+        countdownValue = 4;
         countdownTimer = new Timer(1250, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -138,10 +139,16 @@ public class GamePanel extends JFrame {
                 countdownLabel.setText(String.valueOf(countdownValue));
                 if (countdownValue < 0) {
                     countdownTimer.stop();
-                    startGame();
+                    if (!restart) {
+                        startGame();
+                    }
+                    else {
+                        restartGame();
+                    }
                 } else if (countdownValue == 0) {
                     countdownLabel.setText("GO!");
                 }
+                System.out.println(countdownValue + ", " + countdownLabel.getText());
             }
         });
         countdownTimer.start();
@@ -149,29 +156,9 @@ public class GamePanel extends JFrame {
 
     private void startGame() {
         gm.start();
-        // env = new Environment();
-        // env.setSize(width, height);
-        // env.setVisible(true);
         add(GameManager.env);
 
         bg.setVisible(false);
-    }
-
-    private void startCountdownRetry() {
-        countdownTimer = new Timer(1250, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                countdownValue--;
-                countdownLabel.setText(String.valueOf(countdownValue));
-                if (countdownValue < 0) {
-                    countdownTimer.stop();
-                    restartGame();
-                } else if (countdownValue == 0) {
-                    countdownLabel.setText("GO!");
-                }
-            }
-        });
-        countdownTimer.start();
     }
 
     private void restartGame() {
