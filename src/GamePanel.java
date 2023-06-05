@@ -127,32 +127,37 @@ public class GamePanel extends JFrame {
         countdownLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(countdownLabel);
 
+
         setVisible(true);
     }
 
     private void startCountdown(boolean restart) {
-        countdownValue = 4;
-        countdownTimer = new Timer(1250, new ActionListener() {
+        countdownValue = 3;  // Ubah nilai awal countdown menjadi 3
+        countdownLabel.setText(String.valueOf(countdownValue));  // Tampilkan angka 3 pada label countdown
+        bg.setVisible(true);
+        
+        countdownTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 countdownValue--;
-                countdownLabel.setText(String.valueOf(countdownValue));
                 if (countdownValue < 0) {
                     countdownTimer.stop();
                     if (!restart) {
                         startGame();
-                    }
-                    else {
+                    } else {
                         restartGame();
                     }
-                } else if (countdownValue == 0) {
+                } else if(countdownValue == 0){
                     countdownLabel.setText("GO!");
                 }
-                System.out.println(countdownValue + ", " + countdownLabel.getText());
+                else {
+                    countdownLabel.setText(String.valueOf(countdownValue));
+                }
             }
         });
         countdownTimer.start();
     }
+    
 
     private void startGame() {
         gm.start();
