@@ -1,19 +1,26 @@
-import javax.swing.*;
+import java.util.ArrayList;
 
 public class RoadHole extends ColliderObject implements ICollision {
     private int posX;
     private int posY;
-    private int[] availablePosX = {120, 278};
+    private ArrayList<Integer> availablePosX;
     private int randIdxPos;
     private int initPosY;
+    private int type;
 
     public RoadHole(int posY, int type) {
         super(1);
+        this.type = type;
+        availablePosX = new ArrayList<>();
+        availablePosX.add(120);
+        availablePosX.add(278);
         if (type == 1) {
-            img = new ImageIcon("src/assets/Obstacle1_Small.png");
+            img = ResourceManager.ROADHOLE_IMGS[0];
         }
         else {
-            img = new ImageIcon("src/assets/Obstacle2.png");
+            img = ResourceManager.ROADHOLE_IMGS[1];
+            availablePosX.add(176);
+            availablePosX.add(346);
         }
         width = img.getIconWidth();
         height = img.getIconHeight();
@@ -24,6 +31,9 @@ public class RoadHole extends ColliderObject implements ICollision {
     }
     public int getPosX() {
         return posX;
+    }
+    public int getType() {
+        return type;
     }
     public void spawn() {
         this.posX = getRandomX();
@@ -40,8 +50,8 @@ public class RoadHole extends ColliderObject implements ICollision {
         setLocation(posX, posY);
     }
     private int getRandomX() {
-        randIdxPos = GameManager.rand.nextInt(availablePosX.length);
-        return availablePosX[randIdxPos];
+        randIdxPos = GameManager.rand.nextInt(availablePosX.size());
+        return availablePosX.get(randIdxPos);
     }
     @Override
     public void checkCollision(Player player, CollisionEffect fx) {

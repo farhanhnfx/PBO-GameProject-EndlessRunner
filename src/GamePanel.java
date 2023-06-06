@@ -32,7 +32,7 @@ public class GamePanel extends JFrame implements ActionListener {
 
         gm = new GameManager();
 
-        ImageIcon bgTitle = new ImageIcon("src/assets/title2.png");
+        ImageIcon bgTitle = ResourceManager.GAME_TITLE_IMG;
         JLabel labelTitle = new JLabel(bgTitle);
         labelTitle.setLayout(null);
         JLabel titleDesc = new JLabel("Discover the best road!");
@@ -44,7 +44,7 @@ public class GamePanel extends JFrame implements ActionListener {
         labelTitle.add(titleDesc);
         add(labelTitle);
 
-        ImageIcon bgImage = new ImageIcon("src/assets/background.jpg");
+        ImageIcon bgImage = ResourceManager.START_BG;
         bg = new JLabel(bgImage);
         bg.setBounds(0, 0, 512, 640);
         add(bg);
@@ -85,7 +85,7 @@ public class GamePanel extends JFrame implements ActionListener {
         finalScoreText.setHorizontalAlignment(SwingConstants.CENTER);
         finalScoreText.setForeground(new Color(253, 187, 60));
         finalScoreText.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 90));
-        finalScoreText.setBounds(156, 300, 200, 135);
+        finalScoreText.setBounds(0, 300, width, 135);
         gameOverPanel.add(finalScoreText);
 
         add(gameOverPanel);

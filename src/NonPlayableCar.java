@@ -17,6 +17,7 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
     private Timer timer = new Timer(500, this);
     private final ImageIcon[] carImgs = ResourceManager.NPC_CARS;
     private JLabel label;
+    private int speed;
 
     public NonPlayableCar() {
         super(Player.MAX_HEALTH);
@@ -40,16 +41,18 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
         posY = initPosY;
         posX = getRandomX();
         obstacleAhead = false;
+        speed = GameManager.NPC_SPEED;
         setBounds(posX, posY, width, height);
         setIcon(getRandomImg());
     }
     public void moveDown() {
         // this.posY -= 6; // if from bottom to up
-        this.posY += GameManager.NPC_SPEED; // if from up to bottom
+        this.posY += speed; // if from up to bottom
         // if (this.posY < -height) { // < -height if from bottom to up
         if (this.posY > GamePanel.height) {
             this.posX = getRandomX();
             this.posY = initPosY;
+            speed = GameManager.NPC_SPEED;
             setIcon(getRandomImg());
         }
         setLocation(posX, posY);
@@ -82,6 +85,7 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
         }
         if (canMove()) {
             posX = availablePosX[movementInt];
+            // posY -= height/2; // asline += height/4
         }
         setLocation(posX, posY);
     }
@@ -91,29 +95,46 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
         }
         if (canMove()) {
             posX = availablePosX[movementInt];
+            // posY -= height/4; // asline += height/4
         }
         setLocation(posX, posY);
     }
-    public void detectOtherObstacle(ColliderObject o) {
-        if (getBounds().intersects(o.getBounds()) && !obstacleAhead) {
+    public void detectOtherObstacle(RoadHole r) {
+        if (getBounds().intersects(r.getBounds()) && !obstacleAhead) {
             obstacleAhead = true;
             timer.start();
-            if (movementInt == 3) {
-                movementInt--;
+            if (r.getType() == 1) {
+                // jika bertemu jeglongan besar
+                // dan mobil berada di pinggir jalan
+                // maka mobil slowdown
+                if (movementInt == 0 || movementInt == 3) {
+                    speed = GameManager.OBS_SPEED;
+                }
+                else if (movementInt == 1) {
+                    moveRight();
+                }
+                else {
+                    moveLeft();
+                }
             }
-            else if (movementInt == 0) {
-                movementInt++;
-            }
-            else if (movementInt == 2) {
-                movementInt++;
-            }
-            else if (movementInt == 1) {
-                movementInt++;
+            else {
+                if (movementInt == 0) {
+                    moveRight();
+                }
+                else if (movementInt == 1 || movementInt == 2) {
+                    int x = GameManager.rand.nextInt(2);
+                    if (x == 0) {
+                        moveLeft();
+                    }
+                    else {
+                        moveRight();
+                    }
+                }
+                else {
+                    moveLeft();
+                }
             }
             // System.out.println("Obstacle Detected Ahead! [CODE: " + movementInt + "]");
-            posX = availablePosX[movementInt];
-            posY += height/4;
-            setLocation(posX, posY);
         }
     }
     @Override

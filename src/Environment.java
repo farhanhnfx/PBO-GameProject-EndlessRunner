@@ -35,8 +35,8 @@ public class Environment extends JLayeredPane implements ActionListener {
         fxScreen = new CollisionEffect();
         npCar = new NonPlayableCar();
         roadMarks = new ArrayList<>();
-        rh = new RoadHole(-100, 1);
-        rh2 = new RoadHole(-700, 2);
+        rh = new RoadHole(-700, 1);
+        rh2 = new RoadHole(-100, 2);
         healObj = new PowerUp(-5000);
 
 
@@ -92,25 +92,28 @@ public class Environment extends JLayeredPane implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!GameManager.isGameOver) {
-            for (RoadMark rm : roadMarks) {
-                rm.moveDown();
-            }
-
-            rh.moveDown();
-            rh2.moveDown();
-            npCar.moveDown();
-            healObj.moveDown();
-
-            rh.checkCollision(player,fxScreen);
-            rh2.checkCollision(player, fxScreen);
-            npCar.checkCollision(player, fxScreen);
-            healObj.checkCollision(player, fxScreen);
-
-            npCar.detectOtherObstacle(rh);
-            npCar.detectOtherObstacle(rh2);
+            runActivities();
         }
         else {
             timer.stop();
         }
+    }
+    public void runActivities() {
+        for (RoadMark rm : roadMarks) {
+            rm.moveDown();
+        }
+
+        rh.moveDown();
+        rh2.moveDown();
+        npCar.moveDown();
+        healObj.moveDown();
+
+        rh.checkCollision(player,fxScreen);
+        rh2.checkCollision(player, fxScreen);
+        npCar.checkCollision(player, fxScreen);
+        healObj.checkCollision(player, fxScreen);
+
+        npCar.detectOtherObstacle(rh);
+        npCar.detectOtherObstacle(rh2);
     }
 }

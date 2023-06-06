@@ -43,6 +43,7 @@ public class GameManager implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         gameScore += 5;
         board.updateScore(gameScore);
+        // env.runActivities();
         // System.out.println("SCORE: " + gameScore);
         if (isGameOver) {
             // System.out.println("isGameOver: " + isGameOver);

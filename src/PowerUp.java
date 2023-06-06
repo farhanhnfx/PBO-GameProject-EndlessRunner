@@ -6,7 +6,7 @@ public class PowerUp extends JLabel implements ICollision{
     private int point; 
     private int posX;
     private int posY;
-    private int[] availablePosX = {100, 176, 270, 346};
+    private int[] availablePosX = {108, 176, 270, 346};
     private Random random;
     private int randIdxPos;
     private int initPosY;
@@ -22,7 +22,7 @@ public class PowerUp extends JLabel implements ICollision{
         this.posX = getRandomX();
         this.initPosY = posY;
         this.posY = initPosY;
-        img = new ImageIcon("src/assets/PowerUp.png");
+        img = ResourceManager.POWERUP_IMG;
         width = img.getIconWidth();
         height = img.getIconHeight();
         setIcon(img);

@@ -11,6 +11,12 @@ public class ResourceManager {
     public static final Font POPPINS_BOLD;
     public static final ImageIcon[] NPC_CARS;
     public static final ImageIcon PLAYER_CAR;
+    public static final ImageIcon GAME_TITLE_IMG;
+    public static final ImageIcon START_BG;
+    public static final ImageIcon BOARD_BG;
+    public static final ImageIcon ENGINE_IMG;
+    public static final ImageIcon POWERUP_IMG;
+    public static final ImageIcon[] ROADHOLE_IMGS;
 
     static {
         Font poppinsLight = null;
@@ -41,6 +47,14 @@ public class ResourceManager {
         NPC_CARS[1] = new ImageIcon("src/assets/Car_Blue.png");
         NPC_CARS[2] = new ImageIcon("src/assets/Car_Yellow.png");
         PLAYER_CAR = new ImageIcon("src/assets/Car.png");
+        GAME_TITLE_IMG = new ImageIcon("src/assets/title2.png");
+        START_BG = new ImageIcon("src/assets/background.jpg");
+        BOARD_BG = new ImageIcon("src/assets/BgBoard.png");
+        ENGINE_IMG = new  ImageIcon("src/assets/engine.png");
+        POWERUP_IMG = new ImageIcon("src/assets/PowerUp.png");
+        ROADHOLE_IMGS = new ImageIcon[2];
+        ROADHOLE_IMGS[0] = new ImageIcon("src/assets/Obstacle1.png");
+        ROADHOLE_IMGS[1] = new ImageIcon("src/assets/Obstacle2_Small.png");
     }
 
     private ResourceManager() {}

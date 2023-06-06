@@ -11,7 +11,7 @@ public class Board extends JLabel {
     private HealthBar healthBar;
 
     public Board() {
-        img = new ImageIcon("src/assets/BgBoard.png");
+        img = ResourceManager.BOARD_BG;
         setBounds(16, 16, 144, 112);
         setIcon(img);
 
@@ -67,7 +67,7 @@ public class Board extends JLabel {
     }
 
     public void engineImg() {
-        JLabel img = new JLabel(new ImageIcon("src/assets/engine.png"));
+        JLabel img = new JLabel(ResourceManager.ENGINE_IMG);
         img.setBounds(18, 61, 12, 9);
         add(img);
     }
