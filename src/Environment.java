@@ -14,11 +14,11 @@ public class Environment extends JLayeredPane implements ActionListener {
     private ImageIcon roadImg;
     private JLabel roadLabel;
     private Timer timer;
-    public RoadHole rh;
-    public RoadHole rh2;
+    private RoadHole rh;
+    private RoadHole rh2;
     private Player player;
     private CollisionEffect fxScreen;
-    public NonPlayableCar npCar;
+    private NonPlayableCar npCar;
     private PowerUp healObj;
     // private Board board;
 
@@ -51,22 +51,28 @@ public class Environment extends JLayeredPane implements ActionListener {
         add(GameManager.board);
         add(player, 0);
         add(fxScreen);
+        add(healObj, -1);
         add(npCar, -1);
         add(rh, -1);
         add(rh2, -1);
-        add(healObj, -1);
 
         for (RoadMark rm : roadMarks) {
             add(rm, -1);    // add to background
         }
         add(roadLabel, -1);
-        timer = new Timer(15, this);
+        timer = new Timer(GameManager.ENV_DELAY, this);
         timer.start();
     }
 
 
-    public Player getPlayer() {
-        return player;
+    public RoadHole getRh() {
+        return rh;
+    }
+    public RoadHole getRh2() {
+        return rh2;
+    }
+    public NonPlayableCar getNpCar() {
+        return npCar;
     }
     public ArrayList<RoadMark> getRoadMarks() {
         return this.roadMarks;
@@ -75,7 +81,7 @@ public class Environment extends JLayeredPane implements ActionListener {
 
     @Override   // draw background
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        // super.paintComponent(g);
         g.setColor(sideColor);
         g.fillRect(0, 0, sideWidth, height);
         g.fillRect(roadWidth+sideWidth, 0, sideWidth, height);
@@ -87,13 +93,13 @@ public class Environment extends JLayeredPane implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!GameManager.isGameOver) {
             for (RoadMark rm : roadMarks) {
-                rm.addPosY();
+                rm.moveDown();
             }
 
-            rh.addPosY();
-            rh2.addPosY();
-            npCar.addPosY();
-            healObj.addPosY();
+            rh.moveDown();
+            rh2.moveDown();
+            npCar.moveDown();
+            healObj.moveDown();
 
             rh.checkCollision(player,fxScreen);
             rh2.checkCollision(player, fxScreen);
@@ -102,6 +108,9 @@ public class Environment extends JLayeredPane implements ActionListener {
 
             npCar.detectOtherObstacle(rh);
             npCar.detectOtherObstacle(rh2);
+        }
+        else {
+            timer.stop();
         }
     }
 }

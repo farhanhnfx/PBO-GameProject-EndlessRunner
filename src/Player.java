@@ -8,14 +8,14 @@ public class Player extends JLabel implements ActionListener, KeyListener {
     public static final int width = 64;
     public static final int height = 120;
     private ImageIcon carImg;
-    private int posX = 100;
-    private int posY = 448;
+    private int posX;
+    private final int posY = 448;
     private final int[] availablePosX = {100, 176, 270, 346};
     private int movementInt;
     private int health;
-    private boolean isCollided;
+    public boolean isCollided;
     private final Timer collideTimer = new Timer(600, this);  // bar collide tak gawe invisible 0.5 detik
-    private final int MAX_HEALTH = 7;
+    public static final int MAX_HEALTH = 7;
 
     public Player() {
         carImg = ResourceManager.PLAYER_CAR;
@@ -43,9 +43,6 @@ public class Player extends JLabel implements ActionListener, KeyListener {
         isCollided = false;
         setBounds(posX, posY, width, height);
         GameManager.board.updateHealth(health);
-    }
-    public boolean isCollided() {
-        return isCollided;
     }
     public void decreaseHealth(int damage) {
         this.isCollided = true;

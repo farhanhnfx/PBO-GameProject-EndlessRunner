@@ -20,7 +20,7 @@ public class RoadHole extends ColliderObject implements ICollision {
         setIcon(img);
         this.initPosY = posY;
         spawn();
-        System.out.println(initPosY);
+        // System.out.println(initPosY);
     }
     public int getPosX() {
         return posX;
@@ -31,8 +31,8 @@ public class RoadHole extends ColliderObject implements ICollision {
         // this.posY = initPosY;
         setBounds(posX, initPosY, width, height);
     }
-    public void addPosY() {
-        this.posY += 8;
+    public void moveDown() {
+        this.posY += GameManager.OBS_SPEED;
         if (this.posY > GamePanel.height) {
             this.posX = getRandomX();
             this.posY = initPosY;
@@ -45,11 +45,11 @@ public class RoadHole extends ColliderObject implements ICollision {
     }
     @Override
     public void checkCollision(Player player, CollisionEffect fx) {
-        if (!player.isCollided() && player.getBounds().intersects(getBounds())) {
+        if (!player.isCollided && player.getBounds().intersects(getBounds())) {
             player.decreaseHealth(damage);
             // System.out.println("jeglong!");
             fx.displayDamageScreen();
         }
     }
-    
+
 }

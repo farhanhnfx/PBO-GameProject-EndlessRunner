@@ -1,17 +1,13 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Board extends JLabel {
     private ImageIcon img;
-    public int score = 0;
-    public JLabel boardLabel;
     private JLabel scoreLabel;
-    public ArrayList<Color> colors;
     private HealthBar healthBar;
 
     public Board() {
@@ -23,7 +19,6 @@ public class Board extends JLabel {
         add(healthBar);
 
         displayScore();
-        // score();
         engineImg();
         engineText();
 
@@ -83,25 +78,5 @@ public class Board extends JLabel {
         font.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 10));
         font.setForeground(Color.WHITE);
         add(font);
-    }
-
-    public void healthDisplay(Graphics g) {
-        int width = 112;
-        int height = 16;
-
-        int numColors = 7;
-
-        int colorWidth = width / numColors;
-
-        // Daftar warna
-        // Color[] colors = { color1, color2, color3, color4, color5, color6, color7 };
-
-        for (int i = 0; i < numColors; i++) {
-            int x = i * colorWidth;
-            int y = 0;
-
-            g.setColor(colors.get(i));
-            g.fillRect(x+16, y+78, colorWidth, height);
-        }
     }
 }

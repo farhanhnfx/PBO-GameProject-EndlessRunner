@@ -1,11 +1,8 @@
 import javax.swing.*;
 import java.util.Random;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PowerUp extends JLabel implements ICollision{
-    protected ImageIcon img;
-    protected ImageIcon img_exit;
+    private ImageIcon img;
     private int point; 
     private int posX;
     private int posY;
@@ -13,8 +10,8 @@ public class PowerUp extends JLabel implements ICollision{
     private Random random;
     private int randIdxPos;
     private int initPosY;
-    protected int width;
-    protected int height;
+    private int width;
+    private int height;
 
 
     
@@ -28,7 +25,6 @@ public class PowerUp extends JLabel implements ICollision{
         img = new ImageIcon("src/assets/PowerUp.png");
         width = img.getIconWidth();
         height = img.getIconHeight();
-        img_exit = new ImageIcon("src/assets/PowerUp-Exit.gif");
         setIcon(img);
         setBounds(posX, initPosY, width, height);
     }
@@ -41,45 +37,30 @@ public class PowerUp extends JLabel implements ICollision{
     // Randomize spawning location by x-axis
     private int getRandomX() {
         randIdxPos = random.nextInt(availablePosX.length);
+        setVisible(true);
         return availablePosX[randIdxPos];
     }
 
     // Display Effect When hit By Player
     @Override
     public void checkCollision(Player player, CollisionEffect fx) {
-        if (!player.isCollided() && player.getBounds().intersects(getBounds())) {
+        if (!player.isCollided && player.getBounds().intersects(getBounds())) {
             player.increaseHealth(point);
             // System.out.println("jeglong!");
             fx.displayHealedScreen();
-            tempExitAnimation();
+            setVisible(false);
         }
-        
     }
 
 
     // Method to move same as roadmark
-    public void addPosY() {
-        this.posY += 8;
+    public void moveDown() {
+        this.posY += GameManager.OBS_SPEED;
         if (this.posY > GamePanel.height - initPosY) {
             this.posX = getRandomX();
             this.posY = initPosY;
         }
         setLocation(posX, posY);
     }
-
-    public void tempExitAnimation(){
-        Timer timer = new Timer(3000, new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-                setVisible(true);
-                // setIcon(img);
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-        setVisible(false);
-        // setIcon(img_exit);
-        // setSize(img_exit.getIconWidth(), img_exit.getIconHeight());
-    }
-
     
 }

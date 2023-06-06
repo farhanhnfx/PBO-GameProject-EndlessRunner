@@ -23,8 +23,8 @@ public class HealthBar extends JPanel {
         bars.add(new Bar(new Color(32, 207, 49)));
 
         for (Bar bar : bars) {
-            bar.setVisible(false);
             add(bar);
+            bar.setVisible(false);
         }
     }
     

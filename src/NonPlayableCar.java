@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,12 +19,13 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
     private JLabel label;
 
     public NonPlayableCar() {
-        super(7);
+        super(Player.MAX_HEALTH);
         // img = new ImageIcon("src/assets/Car_Red_Opposite.png");
         width = 64;
         height = 120;
         // initPosY = 1000; // if from bottom to up
         // posY = 1000;
+        initPosY = -500;
         
         label = new JLabel();
         label.setBounds(0, 0, width, height);
@@ -37,16 +37,15 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
     }
 
     public void spawn() {
-        initPosY = -500;
-        posY = -500;
+        posY = initPosY;
         posX = getRandomX();
         obstacleAhead = false;
-        setBounds(posX, 100, width, height);
+        setBounds(posX, posY, width, height);
         setIcon(getRandomImg());
     }
-    public void addPosY() {
+    public void moveDown() {
         // this.posY -= 6; // if from bottom to up
-        this.posY += 12; // if from up to bottom
+        this.posY += GameManager.NPC_SPEED; // if from up to bottom
         // if (this.posY < -height) { // < -height if from bottom to up
         if (this.posY > GamePanel.height) {
             this.posX = getRandomX();
@@ -64,12 +63,12 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
         randIdx = GameManager.rand.nextInt(carImgs.length);
         return carImgs[randIdx];
     }
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.RED);
-        g.drawRect(0, 0, width, height);
-    }
+    // @Override
+    // protected void paintComponent(Graphics g) {
+    //     super.paintComponent(g);
+    //     g.setColor(Color.RED);
+    //     g.drawRect(0, 0, width, height);
+    // }
 
     public boolean canMove() {
         if (movementInt >= 0 && movementInt <= 3) {
@@ -111,7 +110,7 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
             else if (movementInt == 1) {
                 movementInt++;
             }
-            System.out.println("Obstacle Detected Ahead! [CODE: " + movementInt + "]");
+            // System.out.println("Obstacle Detected Ahead! [CODE: " + movementInt + "]");
             posX = availablePosX[movementInt];
             posY += height/4;
             setLocation(posX, posY);
@@ -119,7 +118,7 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
     }
     @Override
     public void checkCollision(Player p, CollisionEffect fx) {
-        if (!p.isCollided() && p.getBounds().intersects(getBounds())) {
+        if (!p.isCollided && p.getBounds().intersects(getBounds())) {
             p.decreaseHealth(damage);
             fx.displayDamageScreen();
         }

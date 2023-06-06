@@ -15,10 +15,10 @@ public class GamePanel extends JFrame implements ActionListener {
     private Timer countdownTimer;
     private JButton startButton;
     private JButton retryButton;
-    public static JPanel gameOverPanel;
-    public static JLabel finalScoreText;
-    public static JLabel yourScore;
-    public static JLabel gameOverText;
+    private JPanel gameOverPanel;
+    private JLabel finalScoreText;
+    private JLabel yourScore;
+    private JLabel gameOverText;
     private GameManager gm;
     private Timer timer;
     private final Color btnColor = new Color(29, 154, 34);
@@ -104,7 +104,7 @@ public class GamePanel extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 retryButton.setVisible(false);
                 labelTitle.setVisible(false);
-                GamePanel.gameOverPanel.setVisible(false);
+                gameOverPanel.setVisible(false);
                 startCountdown(true);
             }
         });
@@ -128,7 +128,7 @@ public class GamePanel extends JFrame implements ActionListener {
             }
         });
 
-        timer = new Timer(10, this);
+        timer = new Timer(1500, this);
 
         countdownLabel = new JLabel();
         countdownLabel.setBounds(0, 250, width, 100);

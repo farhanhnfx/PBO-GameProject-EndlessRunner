@@ -10,6 +10,9 @@ public class GameManager implements ActionListener {
     public static Board board;
     public static Random rand;
     public static Environment env;
+    public static final int NPC_SPEED = 12; // default: 12
+    public static final int OBS_SPEED = 8; //  default: 8
+    public static final int ENV_DELAY = 15; //  default: 15
     private Timer timer;
 
     public GameManager() {
@@ -32,9 +35,9 @@ public class GameManager implements ActionListener {
         isGameOver = false;
         timer.start();
         player.spawn();
-        env.rh.spawn();
-        env.rh2.spawn();
-        env.npCar.spawn();
+        env.getRh().spawn();
+        env.getRh2().spawn();
+        env.getNpCar().spawn();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
