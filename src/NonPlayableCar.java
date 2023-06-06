@@ -99,8 +99,14 @@ public class NonPlayableCar extends ColliderObject implements ICollision, Action
         }
         setLocation(posX, posY);
     }
+    public boolean onScreen() {
+        if (posY >= 0 && posY < GamePanel.height) {
+            return true;
+        }
+        return false;
+    }
     public void detectOtherObstacle(RoadHole r) {
-        if (getBounds().intersects(r.getBounds()) && !obstacleAhead) {
+        if (getBounds().intersects(r.getBounds()) && !obstacleAhead && onScreen()) {
             obstacleAhead = true;
             timer.start();
             if (r.getType() == 1) {

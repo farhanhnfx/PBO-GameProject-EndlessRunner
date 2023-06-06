@@ -35,16 +35,17 @@ public class GameManager implements ActionListener {
         isGameOver = false;
         timer.start();
         player.spawn();
+        board.updateScore(gameScore);
         env.getRh().spawn();
         env.getRh2().spawn();
         env.getNpCar().spawn();
+        env.startEnv();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         gameScore += 5;
         board.updateScore(gameScore);
         // env.runActivities();
-        // System.out.println("SCORE: " + gameScore);
         if (isGameOver) {
             // System.out.println("isGameOver: " + isGameOver);
             // GamePanel.finalScoreText.setText(Integer.toString(gameScore));

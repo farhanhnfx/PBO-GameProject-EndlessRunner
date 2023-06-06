@@ -98,6 +98,9 @@ public class Environment extends JLayeredPane implements ActionListener {
             timer.stop();
         }
     }
+    public void startEnv() {
+        timer.start();
+    }
     public void runActivities() {
         for (RoadMark rm : roadMarks) {
             rm.moveDown();
