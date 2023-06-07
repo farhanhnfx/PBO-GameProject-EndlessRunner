@@ -1,49 +1,29 @@
-import javax.swing.*;
-import java.util.Random;
-
-public class PowerUp extends JLabel implements ICollision{
-    private ImageIcon img;
-    private int point; 
-    private int posX;
-    private int posY;
-    private int[] availablePosX = {108, 176, 270, 346};
-    private Random random;
-    private int randIdxPos;
-    private int initPosY;
-    private int width;
-    private int height;
-
-
+public class PowerUp extends MovingObject {
+    private int point;
     
     //Same Logic as RoadHole but have the movement OpsCar 
     public PowerUp(int posY) {
+        addSpawnPosX(108);
+        addSpawnPosX(176);
+        addSpawnPosX(270);
+        addSpawnPosX(346);
         this.point = 1;
-        random = new Random();
-        this.posX = getRandomX();
+        setPosX(getRandomX());
         this.initPosY = posY;
-        this.posY = initPosY;
-        img = ResourceManager.POWERUP_IMG;
-        width = img.getIconWidth();
-        height = img.getIconHeight();
-        setIcon(img);
-        setBounds(posX, initPosY, width, height);
-    }
-
-    // Getter For Posx
-    public int getPosX() {
-        return posX;
+        setPosY(initPosY);
+        setImg(ResourceManager.POWERUP_IMG);
     }
 
     // Randomize spawning location by x-axis
     private int getRandomX() {
-        randIdxPos = random.nextInt(availablePosX.length);
+        randomIdx = GameManager.rand.nextInt(getSpawnPosX().size());
         setVisible(true);
-        return availablePosX[randIdxPos];
+        return getSpawnPosX().get(randomIdx);
     }
 
     // Display Effect When hit By Player
     @Override
-    public void checkCollision(Player player, CollisionEffect fx) {
+    public void checkCollision(PlayerCar player, CollisionEffect fx) {
         if (!player.isCollided && player.getBounds().intersects(getBounds())) {
             player.increaseHealth(point);
             // System.out.println("jeglong!");
@@ -51,16 +31,18 @@ public class PowerUp extends JLabel implements ICollision{
             setVisible(false);
         }
     }
-
-
-    // Method to move same as roadmark
     public void moveDown() {
-        this.posY += GameManager.OBS_SPEED;
-        if (this.posY > GamePanel.height - initPosY) {
-            this.posX = getRandomX();
-            this.posY = initPosY;
+        setPosY(getPosY() + GameManager.OBS_SPEED);
+        if (getPosY()> GamePanel.height) {
+            spawn();
         }
-        setLocation(posX, posY);
+        updateLocation();
+    }
+
+    @Override
+    public void spawn() {
+        setPosX(getRandomX());
+        setPosY(initPosY);
     }
     
 }

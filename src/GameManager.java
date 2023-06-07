@@ -6,7 +6,7 @@ import javax.swing.Timer;
 public class GameManager implements ActionListener {
     public static int gameScore;
     public static boolean isGameOver;
-    public static Player player;
+    public static PlayerCar player;
     public static Board board;
     public static Random rand;
     public static Environment env;
@@ -18,7 +18,7 @@ public class GameManager implements ActionListener {
     public GameManager() {
         rand = new Random();
         board = new Board();
-        player = new Player();
+        player = new PlayerCar();
         timer = new Timer(500, this);
     }
     

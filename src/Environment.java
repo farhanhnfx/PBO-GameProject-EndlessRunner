@@ -16,7 +16,7 @@ public class Environment extends JLayeredPane implements ActionListener {
     private Timer timer;
     private RoadHole rh;
     private RoadHole rh2;
-    private Player player;
+    private PlayerCar player;
     private CollisionEffect fxScreen;
     private NonPlayableCar npCar;
     private PowerUp healObj;
