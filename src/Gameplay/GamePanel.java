@@ -82,7 +82,7 @@ public class GamePanel extends JFrame implements ActionListener {
         yourScore.setHorizontalAlignment(SwingConstants.CENTER);
         yourScore.setForeground(new Color(255, 255, 255));
         yourScore.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 24));
-        yourScore.setBounds(150, 270, 214, 36);
+        yourScore.setBounds(0, 270, width, 36);
         gameOverPanel.add(yourScore);
 
         finalScoreText = new JLabel("0");
