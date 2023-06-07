@@ -4,7 +4,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class RoadHole extends Obstacle {
+public class RoadHole extends Obstacle implements IMovementY {
     private int type;
 
     public RoadHole(int posY, int type) {
@@ -31,6 +31,7 @@ public class RoadHole extends Obstacle {
         setPosX(getRandomX());
         setPosY(initPosY);
     }
+    @Override
     public void moveDown() {
         setPosY(getPosY() + GameManager.OBS_SPEED);
         if (getPosY()> GamePanel.height) {
@@ -38,7 +39,7 @@ public class RoadHole extends Obstacle {
         }
         updateLocation();
     }
-    private int getRandomX() {
+    public int getRandomX() {
         randomIdx = GameManager.rand.nextInt(getSpawnPosX().size());
         return getSpawnPosX().get(randomIdx);
     }

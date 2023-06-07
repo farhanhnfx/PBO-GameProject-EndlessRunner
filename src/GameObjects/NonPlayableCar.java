@@ -8,7 +8,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class NonPlayableCar extends Obstacle implements ActionListener {
+public class NonPlayableCar extends Obstacle implements IMovementY, ActionListener {
     private boolean obstacleAhead;
     private Timer timer = new Timer(500, this);
     private final ImageIcon[] carImgs = ResourceManager.NPC_CARS;
@@ -41,7 +41,8 @@ public class NonPlayableCar extends Obstacle implements ActionListener {
         }
         updateLocation();
     }
-    private int getRandomX() {
+    @Override
+    public int getRandomX() {
         randomIdx = GameManager.rand.nextInt(getSpawnPosX().size());
         setMovementInt(randomIdx);
         return getSpawnPosX().get(randomIdx);
