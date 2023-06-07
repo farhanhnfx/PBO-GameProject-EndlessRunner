@@ -5,7 +5,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class PowerUp extends MovingObject {
+public class PowerUp extends MovingObject implements IMovementY {
     private int point;
     
     //Same Logic as RoadHole but have the movement OpsCar 
@@ -22,7 +22,7 @@ public class PowerUp extends MovingObject {
     }
 
     // Randomize spawning location by x-axis
-    private int getRandomX() {
+    public int getRandomX() {
         randomIdx = GameManager.rand.nextInt(getSpawnPosX().size());
         setVisible(true);
         return getSpawnPosX().get(randomIdx);
@@ -38,6 +38,7 @@ public class PowerUp extends MovingObject {
             setVisible(false);
         }
     }
+    @Override
     public void moveDown() {
         setPosY(getPosY() + GameManager.OBS_SPEED);
         if (getPosY()> GamePanel.height) {

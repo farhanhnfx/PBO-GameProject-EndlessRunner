@@ -6,7 +6,7 @@ import javax.swing.*;
 import Gameplay.GameManager;
 import Gameplay.GamePanel;
 
-public class RoadMark extends JPanel  {
+public class RoadMark extends JPanel implements IMovementY {
     public static final int width = 8;
     public static final int height = 64;
     private final Color color = new Color(253, 187, 60);
@@ -23,6 +23,7 @@ public class RoadMark extends JPanel  {
     public int getPosY() {
         return posY;
     }
+    @Override
     public void moveDown() {
         this.posY += GameManager.OBS_SPEED;
         if (this.posY > GamePanel.height + height) {
