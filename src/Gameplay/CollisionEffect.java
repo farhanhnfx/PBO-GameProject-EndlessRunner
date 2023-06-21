@@ -1,5 +1,8 @@
 package Gameplay;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
+
+import Resources.ResourceManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +34,26 @@ public class CollisionEffect extends JPanel {
         });
         timer.setRepeats(false);
     }
-
+    public void playCollisionSoundHit() {
+        Clip collisionSound = ResourceManager.hitSound;
+        if (collisionSound != null) {
+            if (collisionSound.isRunning()) {
+                collisionSound.stop();
+            }
+            collisionSound.setFramePosition(0);
+            collisionSound.start();
+        }
+    }
+    public void playCollisionSoundHeal() {
+        Clip collisionSound = ResourceManager.healSound;
+        if (collisionSound != null) {
+            if (collisionSound.isRunning()) {
+                collisionSound.stop();
+            }
+            collisionSound.setFramePosition(0);
+            collisionSound.start();
+        }
+    }
     public void displayDamageScreen(){
         setBackground(damagedScene);
         timer.start();

@@ -1,4 +1,6 @@
 package Gameplay;
+
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import Resources.ResourceManager;
@@ -13,6 +15,8 @@ public class GamePanel extends JFrame implements ActionListener {
     private JLabel bg;
     private JPanel mainPanel;
     // private Environment env;
+    private Clip backsongClip;
+
 
     private JLabel countdownLabel;
     private int countdownValue;
@@ -47,6 +51,10 @@ public class GamePanel extends JFrame implements ActionListener {
         labelTitle.setBounds(77, 70, 359, 320);
         labelTitle.add(titleDesc);
         add(labelTitle);
+
+        backsongClip = ResourceManager.backgroundMusic;
+        backsongClip.loop(Clip.LOOP_CONTINUOUSLY);
+        backsongClip.start();
 
         ImageIcon bgImage = ResourceManager.START_BG;
         bg = new JLabel(bgImage);
@@ -146,35 +154,33 @@ public class GamePanel extends JFrame implements ActionListener {
     }
 
     private void startCountdown(boolean restart) {
-        countdownValue = 3;  // Ubah nilai awal countdown menjadi 3
-        countdownLabel.setText(String.valueOf(countdownValue));  // Tampilkan angka 3 pada label countdown
+        countdownValue = 3;
+        countdownLabel.setText(String.valueOf(countdownValue));
         bg.setVisible(true);
-        
+
         countdownTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 countdownValue--;
                 if (countdownValue > 0) {
                     countdownLabel.setText(String.valueOf(countdownValue));
-                }
-                else if (countdownValue == 0 ) {
+                } else if (countdownValue == 0) {
                     countdownLabel.setText("GO!");
-                }
-                else {
+                } else {
                     countdownTimer.stop();
                     timer.start();
                     if (!restart) {
                         startGame();
-                    }
-                    else {
+                    } else {
                         restartGame();
                     }
                 }
             }
         });
         countdownTimer.start();
+        ResourceManager.countdownSound.setFramePosition(0); 
+        ResourceManager.countdownSound.start();
     }
-    
 
     private void startGame() {
         gm.start();
@@ -186,18 +192,21 @@ public class GamePanel extends JFrame implements ActionListener {
     private void restartGame() {
         retryButton.setVisible(true);
         gm.restart();
+        backsongClip.setFramePosition(0);
+        backsongClip.start();
 
         bg.setVisible(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if (GameManager.isGameOver) {
-            // System.out.println("overrrrrrrrrrrrr");
             finalScoreText.setText(Integer.toString(GameManager.gameScore));
             gameOverPanel.setVisible(true);
             timer.stop();
+            backsongClip.stop();
+            ResourceManager.gameOverSound.setFramePosition(0);
+            ResourceManager.gameOverSound.start();
         }
     }
 }

@@ -18,6 +18,7 @@ public abstract class Obstacle extends MovingObject {
         if (!player.isCollided && player.getBounds().intersects(getBounds())) {
             player.decreaseHealth(getDamage());
             fx.displayDamageScreen();
+            fx.playCollisionSoundHit();
         }
     }
 }

@@ -35,6 +35,7 @@ public class PowerUp extends MovingObject implements IMovementY {
             player.increaseHealth(point);
             // System.out.println("jeglong!");
             fx.displayHealedScreen();
+            fx.playCollisionSoundHeal();
             setVisible(false);
         }
     }
