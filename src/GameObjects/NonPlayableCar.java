@@ -8,7 +8,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class NonPlayableCar extends Obstacle implements IMovementY, ActionListener {
+public class NonPlayableCar extends Obstacle implements ActionListener {
     private boolean obstacleAhead;
     private Timer timer = new Timer(500, this);
     private final ImageIcon[] carImgs = ResourceManager.NPC_CARS;
@@ -33,6 +33,7 @@ public class NonPlayableCar extends Obstacle implements IMovementY, ActionListen
         speed = GameManager.NPC_SPEED;
         setImg(getRandomImg());
     }
+    @Override
     public void moveDown() {
         setPosY(getPosY() + speed);
         // if (this.posY < -height) { // < -height if from bottom to up

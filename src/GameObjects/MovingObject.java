@@ -1,6 +1,6 @@
 package GameObjects;
 
-public abstract class MovingObject extends ColliderObject implements ICollision {
+public abstract class MovingObject extends ColliderObject implements IMovementY, ICollision {
     protected int randomIdx;
     protected int initPosY;
     

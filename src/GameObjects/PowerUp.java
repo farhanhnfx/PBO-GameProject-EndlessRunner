@@ -5,7 +5,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class PowerUp extends MovingObject implements IMovementY {
+public class PowerUp extends MovingObject {
     private int point;
     
     //Same Logic as RoadHole but have the movement OpsCar 
@@ -31,7 +31,7 @@ public class PowerUp extends MovingObject implements IMovementY {
     // Display Effect When hit By Player
     @Override
     public void checkCollision(PlayerCar player, CollisionEffect fx) {
-        if (!player.isCollided && player.getBounds().intersects(getBounds())) {
+        if (!player.collidedWithPowerUp && player.getBounds().intersects(getBounds())) {
             player.increaseHealth(point);
             // System.out.println("jeglong!");
             fx.displayHealedScreen();

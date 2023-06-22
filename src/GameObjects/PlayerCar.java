@@ -10,7 +10,8 @@ import Resources.ResourceManager;
 
 public class PlayerCar extends ColliderObject implements ActionListener, KeyListener {
     private int health;
-    public boolean isCollided;
+    public boolean collidedWithObstacle;
+    public boolean collidedWithPowerUp;
     private final Timer collideTimer = new Timer(600, this);  // bar collide tak gawe invisible 0.5 detik
     public static final int MAX_HEALTH = 7;
 
@@ -36,12 +37,13 @@ public class PlayerCar extends ColliderObject implements ActionListener, KeyList
         setMovementInt(randomPos);
         setPosX(getSpawnPosX().get(randomPos));
         health = MAX_HEALTH;
-        isCollided = false;
+        collidedWithObstacle = false;
+        collidedWithPowerUp = false;
         setBounds(getPosX(), getPosY(), width, height);
         GameManager.board.updateHealth(health);
     }
     public void decreaseHealth(int damage) {
-        this.isCollided = true;
+        this.collidedWithObstacle = true;
         health -= damage;
         if (health <= 0) {
             health = 0;
@@ -53,7 +55,8 @@ public class PlayerCar extends ColliderObject implements ActionListener, KeyList
     }
 
     public void increaseHealth(int point) {
-        this.isCollided = true;
+        // this.collidedWithRoadHole = true;
+        this.collidedWithPowerUp = true;
         health += point;
         if (health > 7) {
             health = MAX_HEALTH;
@@ -65,7 +68,8 @@ public class PlayerCar extends ColliderObject implements ActionListener, KeyList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.isCollided = false;
+        this.collidedWithObstacle = false;
+        this.collidedWithPowerUp = false;
     }
 
     @Override

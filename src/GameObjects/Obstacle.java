@@ -15,7 +15,7 @@ public abstract class Obstacle extends MovingObject {
     }
     @Override
     public void checkCollision(PlayerCar player, CollisionEffect fx) {
-        if (!player.isCollided && player.getBounds().intersects(getBounds())) {
+        if (!player.collidedWithObstacle && player.getBounds().intersects(getBounds())) {
             player.decreaseHealth(getDamage());
             fx.displayDamageScreen();
             fx.playCollisionSoundHit();

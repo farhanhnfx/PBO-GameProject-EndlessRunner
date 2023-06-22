@@ -13,7 +13,6 @@ public abstract class ColliderObject extends JLabel {
     private int posY = 448;
     private ArrayList<Integer> spawnPosX; // = {100, 176, 270, 346};
     private int movementInt;
-    public boolean isCollided;
 
     public ColliderObject() {
         spawnPosX = new ArrayList<>();

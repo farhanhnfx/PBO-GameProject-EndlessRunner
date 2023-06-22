@@ -4,7 +4,7 @@ import Gameplay.GameManager;
 import Gameplay.GamePanel;
 import Resources.ResourceManager;
 
-public class RoadHole extends Obstacle implements IMovementY {
+public class RoadHole extends Obstacle {
     private int type;
 
     public RoadHole(int posY, int type) {
