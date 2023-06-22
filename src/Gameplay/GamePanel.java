@@ -32,6 +32,7 @@ public class GamePanel extends JFrame implements ActionListener {
     private GameManager gm;
     private Timer timer;
     private final Color btnColor = new Color(29, 154, 34);
+    private int highScore;
 
     public GamePanel() {
         setTitle("Lampung: Discover the best road");
@@ -218,7 +219,11 @@ public class GamePanel extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (GameManager.isGameOver) {
             finalScoreText.setText(Integer.toString(GameManager.gameScore));
-            highScoreNum.setText(Integer.toString(GameManager.highScore));
+            if (GameManager.gameScore > highScore) {
+                highScore = GameManager.gameScore;
+            }
+            System.out.println("high score: " + highScore);
+            highScoreNum.setText(Integer.toString(highScore));
             gameOverPanel.setVisible(true);
             timer.stop();
             backsongClip.stop();
