@@ -18,12 +18,14 @@ public class GameManager implements ActionListener {
     public static final int OBS_SPEED = 8; //  default: 8
     public static final int ENV_DELAY = 15; //  default: 15
     private Timer timer;
+    public static int highScore;
 
     public GameManager() {
         rand = new Random();
         board = new Board();
         player = new PlayerCar();
         timer = new Timer(500, this);
+        highScore = 0;
     }
     
     public void start() {
@@ -55,6 +57,10 @@ public class GameManager implements ActionListener {
             // GamePanel.finalScoreText.setText(Integer.toString(gameScore));
             // GamePanel.gameOverPanel.setVisible(true);
             timer.stop();
+            if (gameScore > highScore) {
+                highScore = gameScore;
+            }
+            System.out.println("high score: " + highScore);
         }
     }
 }

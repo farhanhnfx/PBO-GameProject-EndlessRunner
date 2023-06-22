@@ -26,6 +26,8 @@ public class GamePanel extends JFrame implements ActionListener {
     private JPanel gameOverPanel;
     private JLabel finalScoreText;
     private JLabel yourScore;
+    private JLabel highScoreText;
+    private JLabel highScoreNum;
     private JLabel gameOverText;
     private GameManager gm;
     private Timer timer;
@@ -90,15 +92,29 @@ public class GamePanel extends JFrame implements ActionListener {
         yourScore.setHorizontalAlignment(SwingConstants.CENTER);
         yourScore.setForeground(new Color(255, 255, 255));
         yourScore.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 24));
-        yourScore.setBounds(0, 270, width, 36);
+        yourScore.setBounds(0, 240, width, 36);
         gameOverPanel.add(yourScore);
+
+        highScoreText = new JLabel("HIGH SCORE");
+        highScoreText.setHorizontalAlignment(SwingConstants.CENTER);
+        highScoreText.setForeground(new Color(255, 255, 255));
+        highScoreText.setFont(ResourceManager.POPPINS_LIGHT.deriveFont(Font.PLAIN, 20));
+        highScoreText.setBounds(0, 368, width, 36);
+        gameOverPanel.add(highScoreText);
 
         finalScoreText = new JLabel("0");
         finalScoreText.setHorizontalAlignment(SwingConstants.CENTER);
         finalScoreText.setForeground(new Color(253, 187, 60));
         finalScoreText.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 90));
-        finalScoreText.setBounds(0, 300, width, 135);
+        finalScoreText.setBounds(0, 260, width, 135);
         gameOverPanel.add(finalScoreText);
+
+        highScoreNum = new JLabel("0");
+        highScoreNum.setHorizontalAlignment(SwingConstants.CENTER);
+        highScoreNum.setForeground(new Color(253, 187, 60));
+        highScoreNum.setFont(ResourceManager.POPPINS_BOLD.deriveFont(Font.PLAIN, 30));
+        highScoreNum.setBounds(0, 355, width, 135);
+        gameOverPanel.add(highScoreNum);
 
         add(gameOverPanel);
         retryButton = new JButton();
@@ -202,6 +218,7 @@ public class GamePanel extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (GameManager.isGameOver) {
             finalScoreText.setText(Integer.toString(GameManager.gameScore));
+            highScoreNum.setText(Integer.toString(GameManager.highScore));
             gameOverPanel.setVisible(true);
             timer.stop();
             backsongClip.stop();
