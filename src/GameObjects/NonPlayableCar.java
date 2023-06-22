@@ -27,7 +27,9 @@ public class NonPlayableCar extends Obstacle implements ActionListener {
 
     public void spawn() {
         // super.img = getRandomImg();
-        setPosX(getRandomX());
+        // setPosX(getRandomX());
+        setPosX(GameManager.player.getPosX());
+        setMovementInt(GameManager.player.getMovementInt());
         setPosY(initPosY);
         obstacleAhead = false;
         speed = GameManager.NPC_SPEED;
