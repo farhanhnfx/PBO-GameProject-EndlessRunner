@@ -7,6 +7,17 @@ import Resources.ResourceManager;
 public class RoadHole extends Obstacle {
     private int type;
 
+    public RoadHole(int posY) {
+        this.type = 1;
+        addSpawnPosX(120);
+        addSpawnPosX(278);
+        super.setDamage(1);
+        img = ResourceManager.ROADHOLE_IMGS[0];
+        setImg(img);
+        this.initPosY = posY;
+        spawn();
+    }
+
     public RoadHole(int posY, int type) {
         this.type = type;
         addSpawnPosX(120);

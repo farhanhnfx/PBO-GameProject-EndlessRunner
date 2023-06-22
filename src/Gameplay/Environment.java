@@ -43,7 +43,8 @@ public class Environment extends JLayeredPane implements ActionListener {
         fxScreen = new CollisionEffect();
         npCar = new NonPlayableCar();
         roadMarks = new ArrayList<>();
-        rh = new RoadHole(-700, 1);
+        // rh = new RoadHole(-700, 1);
+        rh = new RoadHole(-700);
         rh2 = new RoadHole(-100, 2);
         healObj = new PowerUp(-5000);
 
